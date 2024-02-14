@@ -58,5 +58,5 @@ U_1: entity work.cnt_reloj(estructural)
               minutos => minutos,
               horas => horas,
               AM_PM => AM_PM);
-
+-- esto es una prueba 
 end estructural;
