@@ -28,13 +28,13 @@ package pack_test_reloj is
                                signal   cmd_tecla: out std_logic_vector(3 downto 0); 
                                signal   clk:       in  std_logic);
 
-  -- Sostenimiento de tecla de entrada a programación
+  -- Sostenimiento de tecla de entrada a programaciï¿½n
   procedure entrar_modo_prog(signal   pulso_largo: out std_logic; 
                      signal   cmd_tecla:   out std_logic_vector(3 downto 0); 
                      signal   clk:         in  std_logic;
                      constant duracion:    in  natural := 15);
 
-  -- Salir del modo de programación
+  -- Salir del modo de programaciï¿½n
   procedure fin_prog(signal   ena_cmd:   out std_logic; 
                      signal   cmd_tecla: out std_logic_vector(3 downto 0); 
                      signal   clk:       in  std_logic);
@@ -92,8 +92,8 @@ package body pack_test_reloj is
                              constant periodo:     in  std_logic;
                              constant valor:       in  std_logic_vector(15 downto 0)) is
   begin
-  
-	-- CODIGO A COMPLETAR POR EL ESTUDIANTE
+    
+    wait until (AM_PM = periodo and valor = horas&minutos);
 	
   end procedure;
 
@@ -123,7 +123,7 @@ package body pack_test_reloj is
 
   end procedure;
 
-  -- Sostenimiento de tecla de entrada en programación
+  -- Sostenimiento de tecla de entrada en programaciï¿½n
   procedure entrar_modo_prog(signal   pulso_largo: out std_logic; 
                      signal   cmd_tecla:   out std_logic_vector(3 downto 0); 
                      signal   clk:         in  std_logic;
@@ -140,13 +140,13 @@ package body pack_test_reloj is
   end procedure;
 
 
-  -- Salir del modo de programación
+  -- Salir del modo de programaciï¿½n
   procedure fin_prog(signal   ena_cmd:   out std_logic; 
                              signal   cmd_tecla: out std_logic_vector(3 downto 0); 
                              signal   clk:       in  std_logic) is
   begin
-  
-	-- CODIGO A COMPLETAR POR EL ESTUDIANTE
+  -- se sale del modo programacion a partir de una pulsacion a A
+    tecleo(ena_cmd, cmd_tecla, clk, X"A");
 
   end procedure;
 
