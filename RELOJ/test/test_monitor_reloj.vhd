@@ -172,14 +172,14 @@ begin
         -- nos encontramos en estado normal y en modo 12h
         if (horas&minutos&segundos) = 0  then
         -- si hh:mm = 00:00 ya sea de am o pm el segundo anterior debe ser el contrario de lo que es ahora 
-          assert (AM_PM = 0 and AM_PM_T1 = 1) or (AM_PM = 1 and AM_PM_T1 = 0)
+          assert (AM_PM = '0' and AM_PM_T1 = '1') or (AM_PM = '1' and AM_PM_T1 = '0')
           report "(-) Error en cambio de AM-PM: no cambia"
           severity error;
 
         else
         -- ahora bien, cuando hh:mm no es 00:00, solo debe de cambiar en las 12:59:59, es decir que no 
         -- cambie hasta las 00:00:00 otra vez 
-          assert (AM_PM = 0 and AM_PM_T1 = 0) or (AM_PM = 1 and AM_PM_T1 = 1)
+          assert (AM_PM = '0' and AM_PM_T1 = '0') or (AM_PM = '1' and AM_PM_T1 = '1')
           report "(-) Error en AM-PM: cambia cuando no debe"
           severity error;   
 
@@ -250,25 +250,25 @@ begin
             --(en AM las horas coinciden con las de 12h)
             -- las horas deben de ser las mismas
             assert hora_T1 = (horas&minutos&X"00")
-            report "(-) Error en cambio de formato de hora de 12 a 24"
+            report "(-) 1. Error en cambio de formato de hora de 12 a 24"
             severity error;
 
           else
             -- ahora nos encontramos en PM, por lo que las horas se les suman 12  
             assert (hora_to_natural(hora_T1) + 12*3600) = hora_to_natural(horas&minutos&X"00")
-            report "(-) Error en cambio de formato de hora de 12 a 24"
+            report "(-) 2. Error en cambio de formato de hora de 12 a 24"
             severity error;
 
           end if;
             -- ??? no es la misma?
             assert hora_T1 = (horas&minutos&X"00")
-            report "(-) Error en cambio de formato de hora de 12 a 24"
+            report "(-) 3. Error en cambio de formato de hora de 12 a 24"
             severity error;
 
         else
          -- nos encontramos en 12h, es decir que antes estabamos en 24h
          assert (hora_to_natural(hora_T1) + 12*3600) = hora_to_natural(horas&minutos&X"00")
-         report "(-) Error en cambio de formato de hora de 12 a 24"
+         report "(-) 4. Error en cambio de formato de hora de 12 a 24 "
          severity error;
 
         end if;
@@ -276,17 +276,17 @@ begin
         elsif hora_T1 < X"120000" then
           --si estamos en 24h siempre coindcide con las primeras 12 horas del modo 12h
             assert hora_T1 = (horas&minutos&X"00")
-            report "(-) Error en cambio de formato de hora de 24 a 12"
+            report "(-) 1. Error en cambio de formato de hora de 24 a 12"
             severity error;
 
         else
           -- ahora bien a partir de 12h se le debe restar 12 horas para que coincida con el modo 12h
           assert (hora_to_natural(hora_T1) - 12*3600) = hora_to_natural(horas&minutos&X"00")
-          report "(-) Error en cambio de formato de hora de 24 a 12"
+          report "(-) 2. Error en cambio de formato de hora de 24 a 12"
           severity error;
 
         end if;
-      end if;
+     
       ena_cmd_T1 := ena_cmd;
       tecla_T1 := cmd_tecla;
       hora_T1 := horas&minutos&X"00";

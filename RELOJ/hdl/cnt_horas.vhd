@@ -31,11 +31,11 @@ architecture rtl of cnt_horas is
 
 begin
 
-  -- Control señal de modo
+  -- Control seï¿½al de modo
   process(clk, nRst)   
   begin
     if nRst = '0' then
-      modo <= '0';
+      modo <= '0'; -- comienza en modo 12 horas
 
     elsif clk'event and clk = '1' then
       if cambiar_modo = '1' then
@@ -45,7 +45,7 @@ begin
     end if;
   end process;
 
-  -- Control señal AM/PM
+  -- Control seï¿½al AM/PM
   process(clk, nRst)   
   begin
     if nRst = '0' then

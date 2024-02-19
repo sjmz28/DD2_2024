@@ -51,13 +51,17 @@ begin
 
 
   process
+  variable h: std_logic_vector(7 downto 0);
+  
   begin
     ena_cmd  <= '0';
     cmd_tecla <= (others => '0');
     pulso_largo <= '0';
+    
 
     -- Esperamos el final del Reset
     wait until nRst'event and nRst = '1';
+
 
     for i in 1 to 9 loop
        wait until clk'event and clk = '1';
@@ -65,17 +69,47 @@ begin
 
     -- Cuenta en formato de 12 horas
     wait until clk'event and clk = '1';
-
-
+    report "(*) Comprobacion de la vuelta en modo 12 horas ";
     -- Esperar a las 11 y 58 AM
-    esperar_hora(horas, minutos, AM_PM, clk, '0', X"11"&X"58");
+    esperar_hora(horas, minutos, AM_PM, clk, '1', X"11"&X"59");
 	
 	-- Cambio de 12h a 24 horas
+    report "(*) Comprobacion de la vuelta en modo 24 horas ";
+  	cambiar_modo_12_24(ena_cmd, cmd_tecla, clk);
+	  esperar_hora(horas, minutos, AM_PM, clk, '1', X"11"&X"59");
 	
-	cambiar_modo_12_24(ena_cmd, cmd_tecla, clk);
-	
-	-- Para completar por el estudiante
-    -- ...
+    report "(*) Comprobacion de la conversion 12-24 y viceversa";
+    esperar_hora(horas, minutos, AM_PM, clk, '0', X"00"&X"03");
+
+    -- variable para las horas
+    
+    h:=X"00";
+  
+    for i in 1 to 12 loop
+      
+      cambiar_modo_12_24(ena_cmd, cmd_tecla, clk);
+      wait until clk'event and clk = '1';
+      wait until clk'event and clk = '1';
+      cambiar_modo_12_24(ena_cmd, cmd_tecla, clk);
+      wait until clk'event and clk = '1';
+     
+      h:=h+X"01";
+      esperar_hora(horas, minutos, AM_PM, clk, '0', h&X"03");
+      end loop;
+     
+      h:=X"00";
+
+    for i in 1 to 12 loop
+    
+      cambiar_modo_12_24(ena_cmd, cmd_tecla, clk);
+      wait until clk'event and clk = '1';
+      wait until clk'event and clk = '1';
+      cambiar_modo_12_24(ena_cmd, cmd_tecla, clk);
+      wait until clk'event and clk = '1';
+       
+      h:=h+X"01";
+      esperar_hora(horas, minutos, AM_PM, clk, '1', h&X"03");
+    end loop;
 
     assert false
     report "done"

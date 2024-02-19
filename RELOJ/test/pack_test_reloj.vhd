@@ -94,7 +94,9 @@ package body pack_test_reloj is
   begin
     
     wait until (AM_PM = periodo and valor = horas&minutos);
-	
+	-- nota: un wait until siempre suspende, luego comprueba si se reanuda o no, es obligatorio que la condicion que pongamos dentro 
+  -- involucre a señales, dado que se evalua cada vez que hay un evento en alguan de las señales dentro de la condicion
+  -- por ello es aburdo poner un wait until (true) ya que no se reanudaria nunca, con variable podría ser pero no que no por si aca (by teacher)
   end procedure;
 
   -- Pulsacion breve de tecla
@@ -190,7 +192,7 @@ package body pack_test_reloj is
                                       signal   cmd_tecla:   out std_logic_vector(3 downto 0);
                                       signal   horas:       in  std_logic_vector(7 downto 0);
                                       signal   minutos:     in  std_logic_vector(7 downto 0);   
-									  signal   AM_PM:     in  std_logic;   
+									                   signal   AM_PM:     in  std_logic;   
                                       signal   clk:         in  std_logic;
 									  constant periodo:   in  std_logic;
                                       constant valor:       in  std_logic_vector(15 downto 0)) is
