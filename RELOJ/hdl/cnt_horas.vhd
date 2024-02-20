@@ -31,11 +31,11 @@ architecture rtl of cnt_horas is
 
 begin
 
-  -- Control se�al de modo
+  -- Control señal de modo
   process(clk, nRst)   
   begin
     if nRst = '0' then
-      modo <= '0'; -- comienza en modo 12 horas
+      modo <= '0';
 
     elsif clk'event and clk = '1' then
       if cambiar_modo = '1' then
@@ -45,20 +45,16 @@ begin
     end if;
   end process;
 
-  -- Control se�al AM/PM
+  -- Control señal AM/PM
   process(clk, nRst)   
   begin
     if nRst = '0' then
       AM_PM <= '0';
 
     elsif clk'event and clk = '1' then
-      -- si el modo se encuentra en 24h y, o es mayor a 11 horas y no se encuentra en situacion limite , o bien es igual a 11 horas y se encuentra en situacion limite
-      -- lo mismo es un error comprobar la situacion limite de mayor a 11 horas
-      -- PROPUESTA A CONSIDERAR ** if modo = '1' and ( horas > X"11" and not(horas = X"23" and (ena = '1' or inc_campo = '1'))) or (horas = X"11" and (ena = '1' or inc_campo = '1')) ) then
       if modo = '1' and ( (horas > X"11" and not(horas = X"23" and (ena = '1' or inc_campo = '1'))) or (horas = X"11" and (ena = '1' or inc_campo = '1')) ) then
-        AM_PM <= '1'; -- se encuentra en PM 
+        AM_PM <= '1';
 
-      -- si el modo se encuentra en 24h y, el valor es menor de 12 horaso bien el valor es 23 horas y se encuentra en situacion limite
       elsif modo = '1' and (horas < X"12" or (horas = X"23" and (ena = '1' or inc_campo = '1'))) then
         AM_PM <= '0';
 
@@ -72,19 +68,17 @@ begin
   fdc_AM_PM <= ena or inc_campo when horas = X"11" and modo = '0' else
                '0';
 
--- **************** ERROR NO 2.
   -- Paso de formato 24 a 12
-  -- UNIDADES
-  aux_horas_12_L <= horas(3 downto 0) - 2 when ((horas(3 downto 0) > 1)and (horas(7 downto 4) = 1)) or -- caso de 12, 13, 14, 15, 16, 17, 18, 19
-                                               ((horas(3 downto 0) >1) and (horas(7 downto 4) = 2)) else-- caso de 20, 21
-                    horas(3 downto 0) + 8 when ((horas(3 downto 0) < 2) and (horas(7 downto 4) = 2));
+  aux_horas_12_L <= horas(3 downto 0) - 2 when (horas(3 downto 0) > 1 AND horas(7 downto 4) = 1)       -- Decenas = 1  y  Unidades > 1
+                                            OR (horas(3 downto 0) > 1 AND horas(7 downto 4) = 2) else  -- Decenas = 2  y  Unidades > 1  (-2)
+                    horas(3 downto 0) + 8 when horas(3 downto 0) < 2 AND (horas(7 downto 4) = 2) else  -- decenas = 2  y  Unidades < 2  (+8)
+			          		horas(3 downto 0);        
 
--- **************** ERROR NO 1.
-  -- DECENAS
-  aux_horas_12_H <= horas(7 downto 4) - 1  when ((horas(3 downto 0) > 1)and (horas(7 downto 4) = 1)) or -- caso de 12, 13, 14, 15, 16, 17, 18, 19
-                                                ((horas(3 downto 0) >1) and (horas(7 downto 0) = 2)) else -- caso de 20, 21
-                    horas(7 downto 4) -2   when ((horas(3 downto 0) < 2) and horas(7 downto 4) = 2);  -- caso de 22, 23
-
+  aux_horas_12_H <= horas(7 downto 4) - 1 when (horas(3 downto 0) > 1 AND horas(7 downto 4) = 1)        -- Decenas = 1  y  Unidades > 1.
+                                            OR (horas(3 downto 0) > 1 AND horas(7 downto 4) = 2) else  -- Decenas = 2  y  Unidades > 1. (-2)
+                    horas(7 downto 4) - 2 when horas(3 downto 0) < 2 AND (horas(7 downto 4) = 2) else  -- decenas = 2  y  Unidades < 2  (+8)
+				          	horas(7 downto 4);
+					
   horas_12 <= aux_horas_12_H & aux_horas_12_L when horas > 11 else
              horas;
 
@@ -132,8 +126,8 @@ begin
   end process;
   
   ena_decenas_horas <= ena or inc_campo when horas(3 downto 0) = 9        else
-                       ena or inc_campo when horas > X"23"                else
-                       ena or inc_campo when horas > X"11" and modo = '0' else
+                       ena or inc_campo when horas > X"22"                else -- *****ERROR***** Antes: horas > X"23"  Ahora: horas > X"22"
+                       ena or inc_campo when horas > X"10" and modo = '0' else -- *****ERROR***** Antes: horas > X"11"  Ahora: horas > X"10"
                        '0';
 
   process(clk, nRst)    -- Decenas de horas

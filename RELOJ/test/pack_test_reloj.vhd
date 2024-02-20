@@ -10,7 +10,7 @@ package pack_test_reloj is
   function hora_to_natural (hora: std_logic_vector(23 downto 0)) return natural;
 
   -- Parar el reloj cuando se alcanza un valor de hora especificado
-  procedure esperar_hora	(signal   horas:       in  std_logic_vector(7 downto 0);
+  procedure esperar_hora    (signal   horas:       in  std_logic_vector(7 downto 0);
                              signal   minutos:     in  std_logic_vector(7 downto 0);   
                              signal   AM_PM:       in  std_logic;   
                              signal   clk:         in  std_logic;
@@ -23,18 +23,18 @@ package pack_test_reloj is
                    signal   clk:       in  std_logic;
                    constant tecla:     in  std_logic_vector(3 downto 0));
 
-  -- cambiar de formato 12 a 24 horas y viceversa
+  -- Cambiar de formato 12 a 24 horas y viceversa
   procedure cambiar_modo_12_24(signal   ena_cmd:   out std_logic; 
                                signal   cmd_tecla: out std_logic_vector(3 downto 0); 
                                signal   clk:       in  std_logic);
 
-  -- Sostenimiento de tecla de entrada a programaci�n
+  -- Sostenimiento de tecla de entrada a programación
   procedure entrar_modo_prog(signal   pulso_largo: out std_logic; 
-                     signal   cmd_tecla:   out std_logic_vector(3 downto 0); 
-                     signal   clk:         in  std_logic;
-                     constant duracion:    in  natural := 15);
+                             signal   cmd_tecla:   out std_logic_vector(3 downto 0); 
+                             signal   clk:         in  std_logic;
+                             constant duracion:    in  natural := 15);
 
-  -- Salir del modo de programaci�n
+  -- Salir del modo de programación
   procedure fin_prog(signal   ena_cmd:   out std_logic; 
                      signal   cmd_tecla: out std_logic_vector(3 downto 0); 
                      signal   clk:       in  std_logic);
@@ -47,22 +47,27 @@ package pack_test_reloj is
                                       signal   cmd_tecla: out std_logic_vector(3 downto 0);
                                       signal   horas:     in  std_logic_vector(7 downto 0);
                                       signal   minutos:   in  std_logic_vector(7 downto 0);   
-									  signal   AM_PM:     in  std_logic;   
+				      signal   AM_PM:     in  std_logic;   
                                       signal   clk:       in  std_logic;
-									  constant periodo:   in  std_logic;
+				      constant periodo:   in  std_logic;
                                       constant valor:     in  std_logic_vector(15 downto 0));
 
-  -- Programar un a hora con el comando de incremento continuo de campo
+  -- Programar una hora con el comando de incremento continuo de campo
   procedure programar_hora_inc_largo (signal   pulso_largo: out std_logic; 
                                       signal   ena_cmd:     out std_logic;
                                       signal   cmd_tecla:   out std_logic_vector(3 downto 0);
                                       signal   horas:       in  std_logic_vector(7 downto 0);
                                       signal   minutos:     in  std_logic_vector(7 downto 0);   
-									  signal   AM_PM:     in  std_logic;   
+				      signal   AM_PM:       in  std_logic;   
                                       signal   clk:         in  std_logic;
-									  constant periodo:   in  std_logic;
+				      constant periodo:     in  std_logic;
                                       constant valor:       in  std_logic_vector(15 downto 0));
 
+  -- Programar una hora indicando el valor de cada campo por introduccion numerica
+  procedure programar_hora_directa (signal   ena_cmd:   out std_logic;
+                                    signal   cmd_tecla: out std_logic_vector(3 downto 0);
+				    signal   clk:       in std_logic;
+				    constant valor:     in std_logic_vector(15 downto 0));
 end package;
 
 package body pack_test_reloj is
@@ -85,18 +90,15 @@ package body pack_test_reloj is
   -- Procedimientos de test -----------------------------------------------------------------------------------
 
   -- Parar el reloj cuando se alcanza un valor de hora especificado
-  procedure esperar_hora	(signal   horas:       in  std_logic_vector(7 downto 0);
+  procedure esperar_hora    (signal   horas:       in  std_logic_vector(7 downto 0);
                              signal   minutos:     in  std_logic_vector(7 downto 0);   
                              signal   AM_PM:       in  std_logic;   
                              signal   clk:         in  std_logic;
                              constant periodo:     in  std_logic;
                              constant valor:       in  std_logic_vector(15 downto 0)) is
   begin
-    
-    wait until (AM_PM = periodo and valor = horas&minutos);
-	-- nota: un wait until siempre suspende, luego comprueba si se reanuda o no, es obligatorio que la condicion que pongamos dentro 
-  -- involucre a señales, dado que se evalua cada vez que hay un evento en alguan de las señales dentro de la condicion
-  -- por ello es aburdo poner un wait until (true) ya que no se reanudaria nunca, con variable podría ser pero no que no por si aca (by teacher)
+   wait until (horas = valor(15 downto 8) and minutos = valor(7 downto 0) and AM_PM = periodo);
+   wait until clk'event and clk = '1';
   end procedure;
 
   -- Pulsacion breve de tecla
@@ -113,7 +115,6 @@ package body pack_test_reloj is
      ena_cmd <= '0';
 
    wait until clk'event and clk = '1';
-
   end procedure;
 
   -- cambiar de formato 12 a 24 horas y viceversa
@@ -122,14 +123,13 @@ package body pack_test_reloj is
                                signal   clk:       in  std_logic) is
   begin
     tecleo(ena_cmd, cmd_tecla, clk, X"D");  
-
   end procedure;
 
-  -- Sostenimiento de tecla de entrada en programaci�n
+  -- Sostenimiento de tecla de entrada en programación
   procedure entrar_modo_prog(signal   pulso_largo: out std_logic; 
-                     signal   cmd_tecla:   out std_logic_vector(3 downto 0); 
-                     signal   clk:         in  std_logic;
-                     constant duracion:    in  natural := 15) is
+                             signal   cmd_tecla:   out std_logic_vector(3 downto 0); 
+                             signal   clk:         in  std_logic;
+                             constant duracion:    in  natural := 15) is
   begin
    wait until clk'event and clk = '1';
      pulso_largo <= '1';
@@ -138,18 +138,14 @@ package body pack_test_reloj is
    wait for duracion*Tclk_50_MHz;
    wait until clk'event and clk = '1';
      pulso_largo <= '0';
-
   end procedure;
 
-
-  -- Salir del modo de programaci�n
+  -- Salir del modo de programación
   procedure fin_prog(signal   ena_cmd:   out std_logic; 
-                             signal   cmd_tecla: out std_logic_vector(3 downto 0); 
-                             signal   clk:       in  std_logic) is
+                     signal   cmd_tecla: out std_logic_vector(3 downto 0); 
+                     signal   clk:       in  std_logic) is
   begin
-  -- se sale del modo programacion a partir de una pulsacion a A
     tecleo(ena_cmd, cmd_tecla, clk, X"A");
-
   end procedure;
 
 
@@ -167,9 +163,9 @@ package body pack_test_reloj is
                                       signal   cmd_tecla: out std_logic_vector(3 downto 0);
                                       signal   horas:     in  std_logic_vector(7 downto 0);
                                       signal   minutos:   in  std_logic_vector(7 downto 0);   
-									  signal   AM_PM:     in  std_logic;   
+				      signal   AM_PM:     in  std_logic;   
                                       signal   clk:       in  std_logic;
-									  constant periodo:   in  std_logic;
+				      constant periodo:   in  std_logic;
                                       constant valor:     in  std_logic_vector(15 downto 0)) is
 
   begin
@@ -183,25 +179,49 @@ package body pack_test_reloj is
    while minutos /= valor(7 downto 0) loop
      tecleo(ena_cmd, cmd_tecla, clk, X"C");
    end loop;
-
    end procedure; 
 
-  -- Programar un a hora con el comando de incremento continuo
+  -- Programar una hora con el comando de incremento continuo
   procedure programar_hora_inc_largo (signal   pulso_largo: out std_logic; 
                                       signal   ena_cmd:     out std_logic;
                                       signal   cmd_tecla:   out std_logic_vector(3 downto 0);
                                       signal   horas:       in  std_logic_vector(7 downto 0);
                                       signal   minutos:     in  std_logic_vector(7 downto 0);   
-									                   signal   AM_PM:     in  std_logic;   
+				      signal   AM_PM:       in  std_logic;   
                                       signal   clk:         in  std_logic;
-									  constant periodo:   in  std_logic;
+				      constant periodo:     in  std_logic;
                                       constant valor:       in  std_logic_vector(15 downto 0)) is
 
   begin
 
-	-- CODIGO A COMPLETAR POR EL ESTUDIANTE
+   pulso_largo <= '1';
+   cmd_tecla <= X"C";                        -- pulso largo en C (incrementa)
+   wait until minutos = valor(7 downto 0);   -- esperas hasta los minutos indicados
+   pulso_largo <= '0';
 
+   tecleo(ena_cmd, cmd_tecla, clk, X"B");    -- pasas a modificar las horas
+
+   pulso_largo <= '1';
+   cmd_tecla <= X"C";                        -- pulso largo en C (incrementa)
+   wait until horas = valor(15 downto 8) and AM_PM = periodo;    -- esperas hasta las horas indicadas en AM o PM
+   wait until clk'event and clk = '1';
+   pulso_largo <= '0';   
   end procedure; 
 
+  -- Programar una hora indicando el valor de cada campo por introduccion numerica
+  procedure programar_hora_directa (signal   ena_cmd:   out std_logic;
+                                    signal   cmd_tecla: out std_logic_vector(3 downto 0);
+				    signal   clk:       in std_logic;
+			            constant valor:     in std_logic_vector(15 downto 0)) is
+  begin
+   tecleo(ena_cmd, cmd_tecla, clk, valor(15 downto 12));   -- editas decenas de horas
+   tecleo(ena_cmd, cmd_tecla, clk, valor(11 downto 8));    -- editas unidades de horas
+   
+   tecleo(ena_cmd, cmd_tecla, clk, X"B");   -- cambia el modo de edicion a minutos
+   
+   tecleo(ena_cmd, cmd_tecla, clk, valor(7 downto 4));   -- editas decenas de minutos
+   tecleo(ena_cmd, cmd_tecla, clk, valor(3 downto 0));   -- editas unidades de minutos
+  end procedure;
 
 end package body pack_test_reloj;
+

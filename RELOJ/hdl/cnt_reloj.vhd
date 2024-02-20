@@ -28,9 +28,17 @@ begin
       port map(clk => clk,
                nRst => nRst,
                tic_1s => tic_1s,
-               nrst_ena => nRst,
+               nrst_ena => ena_reloj,
                fdc => fdc_seg,
                seg => segundos);
+  -- ANTES:
+  -- U0: entity work.cnt_seg(rtl)
+  --     port map(clk => clk,
+  --               nRst => nRst,
+  --               tic_1s => tic_1s,
+  --               nrst_ena => nRst, ****************** ERROR
+  --               fdc => fdc_seg,
+  --               seg => segundos);
 
   U1: entity work.cnt_min(rtl)
       port map(clk => clk,

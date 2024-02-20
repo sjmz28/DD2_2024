@@ -82,12 +82,12 @@ begin
   
   -- Deteccion del comando introducido por teclado
   comando <= programar_reloj    when pulso_largo = '1' and cmd_tecla = X"A" 						else
-             cambio_de_modo     when ena_cmd = '1'     and cmd_tecla = X"D"    						else
-             incrementar_campo  when ena_cmd = '1'     and cmd_tecla = X"C"                         else
-             incrementar_campo  when pulso_largo = '1' and cmd_tecla = X"C" 				        else
-             cambiar_campo      when ena_cmd = '1'     and cmd_tecla = X"B"                         else
-             numero             when ena_cmd = '1'     and cmd_tecla < X"A" 					    else
-             fin_programacion   when ena_cmd = '1'     and cmd_tecla = X"A"                         else          
+             cambio_de_modo     when ena_cmd = '1'     and cmd_tecla = X"D"    					else
+             incrementar_campo  when ena_cmd = '1'     and cmd_tecla = X"C"             else
+             incrementar_campo  when pulso_largo = '1' and cmd_tecla = X"C" 		        else -- tiene que llamrse igual para incrementar x4?
+             cambiar_campo      when ena_cmd = '1'     and cmd_tecla = X"B"             else
+             numero             when ena_cmd = '1'     and cmd_tecla < X"A" 			      else
+             fin_programacion   when ena_cmd = '1'     and cmd_tecla = X"A"             else          
              ninguno;
 
   -- Control de Cambio de Modo
