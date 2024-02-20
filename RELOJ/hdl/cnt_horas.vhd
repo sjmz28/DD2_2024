@@ -52,9 +52,13 @@ begin
       AM_PM <= '0';
 
     elsif clk'event and clk = '1' then
+      -- si el modo se encuentra en 24h y, o es mayor a 11 horas y no se encuentra en situacion limite , o bien es igual a 11 horas y se encuentra en situacion limite
+      -- lo mismo es un error comprobar la situacion limite de mayor a 11 horas
+      -- PROPUESTA A CONSIDERAR ** if modo = '1' and ( horas > X"11" and not(horas = X"23" and (ena = '1' or inc_campo = '1'))) or (horas = X"11" and (ena = '1' or inc_campo = '1')) ) then
       if modo = '1' and ( (horas > X"11" and not(horas = X"23" and (ena = '1' or inc_campo = '1'))) or (horas = X"11" and (ena = '1' or inc_campo = '1')) ) then
-        AM_PM <= '1';
+        AM_PM <= '1'; -- se encuentra en PM 
 
+      -- si el modo se encuentra en 24h y, el valor es menor de 12 horaso bien el valor es 23 horas y se encuentra en situacion limite
       elsif modo = '1' and (horas < X"12" or (horas = X"23" and (ena = '1' or inc_campo = '1'))) then
         AM_PM <= '0';
 
@@ -68,12 +72,18 @@ begin
   fdc_AM_PM <= ena or inc_campo when horas = X"11" and modo = '0' else
                '0';
 
+-- **************** ERROR NO 2.
   -- Paso de formato 24 a 12
-  aux_horas_12_L <= horas(3 downto 0) - 2 when horas(3 downto 0) > 1 else
-                    horas(3 downto 0) + 8;
+  -- UNIDADES
+  aux_horas_12_L <= horas(3 downto 0) - 2 when ((horas(3 downto 0) > 1)and (horas(7 downto 4) = 1)) or -- caso de 12, 13, 14, 15, 16, 17, 18, 19
+                                               ((horas(3 downto 0) >1) and (horas(7 downto 4) = 2)) else-- caso de 20, 21
+                    horas(3 downto 0) + 8 when ((horas(3 downto 0) < 2) and (horas(7 downto 4) = 2));
 
-  aux_horas_12_H <= horas(7 downto 4) - 1 when horas(3 downto 0) > 1 else
-                    horas(7 downto 4) - 2;
+-- **************** ERROR NO 1.
+  -- DECENAS
+  aux_horas_12_H <= horas(7 downto 4) - 1  when ((horas(3 downto 0) > 1)and (horas(7 downto 4) = 1)) or -- caso de 12, 13, 14, 15, 16, 17, 18, 19
+                                                ((horas(3 downto 0) >1) and (horas(7 downto 0) = 2)) else -- caso de 20, 21
+                    horas(7 downto 4) -2   when ((horas(3 downto 0) < 2) and horas(7 downto 4) = 2);  -- caso de 22, 23
 
   horas_12 <= aux_horas_12_H & aux_horas_12_L when horas > 11 else
              horas;

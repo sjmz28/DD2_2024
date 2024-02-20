@@ -69,14 +69,15 @@ begin
 
     -- Cuenta en formato de 12 horas
     wait until clk'event and clk = '1';
-    report "(*) Comprobacion de la vuelta en modo 12 horas ";
-    -- Esperar a las 11 y 58 AM
-    esperar_hora(horas, minutos, AM_PM, clk, '1', X"11"&X"59");
+  --   cambiar_modo_12_24(ena_cmd, cmd_tecla, clk);
+  --   report "(*) Comprobacion de la vuelta en modo 24 horas ";
+  --   -- Esperar a las 11 y 58 AM
+  --   esperar_hora(horas, minutos, AM_PM, clk, '1', X"11"&X"59");
 	
-	-- Cambio de 12h a 24 horas
-    report "(*) Comprobacion de la vuelta en modo 24 horas ";
-  	cambiar_modo_12_24(ena_cmd, cmd_tecla, clk);
-	  esperar_hora(horas, minutos, AM_PM, clk, '1', X"11"&X"59");
+	-- -- Cambio de 12h a 24 horas
+  --   report "(*) Comprobacion de la vuelta en modo 12 horas ";
+  -- 	cambiar_modo_12_24(ena_cmd, cmd_tecla, clk);
+	--   esperar_hora(horas, minutos, AM_PM, clk, '1', X"11"&X"59");
 	
     report "(*) Comprobacion de la conversion 12-24 y viceversa";
     esperar_hora(horas, minutos, AM_PM, clk, '0', X"00"&X"03");

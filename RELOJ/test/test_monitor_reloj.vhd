@@ -243,7 +243,6 @@ begin
 
     elsif clk'event and clk = '1' and ena_assert then
       if ena_cmd_T1 = '1'  and tecla_T1 = X"D" then
-      --se ha cambiado de modo de 12 a 24 o de 24 a 12 en el ciclo anterior
         if modo = '1' then
           if AM_PM_T1 = '0' then 
             -- si el reloj se encuentra en 12h y en el ciclo anterior estaba en AM 
