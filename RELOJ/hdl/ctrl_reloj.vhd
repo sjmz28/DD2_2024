@@ -48,7 +48,7 @@ begin
       cnt <= "001";
 
     elsif clk'event and clk = '1' then
-      if ena_cmd = '1' or time_out = '1' or estado = reposo then
+      if ena_cmd = '1' or time_out = '1' or estado = reposo then -- contemplar el caso de que si hay una pulsacion larga tamb tiene que resetear el contador
         cnt <= "001";
 
       elsif tic_1s = '1' and estado /= reposo then

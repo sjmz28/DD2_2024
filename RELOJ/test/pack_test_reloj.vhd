@@ -171,14 +171,17 @@ package body pack_test_reloj is
   begin
 
    while horas /= valor(15 downto 8) or AM_PM /= periodo loop
-     tecleo(ena_cmd, cmd_tecla, clk, X"C");
+     tecleo(ena_cmd, cmd_tecla, clk, X"C"); --mediante pulsaciones cortas se va incrementando
    end loop;
-
-   tecleo(ena_cmd, cmd_tecla, clk, X"B");
-
+    report "Horas programadas" severity note;
+   tecleo(ena_cmd, cmd_tecla, clk, X"B"); -- cambia el modo de edicion a minutos
+    
    while minutos /= valor(7 downto 0) loop
-     tecleo(ena_cmd, cmd_tecla, clk, X"C");
+     tecleo(ena_cmd, cmd_tecla, clk, X"C"); --mediante pulsaciones cortas se va incrementando
    end loop;
+    report "Minutos programados" severity note;
+    
+    tecleo(ena_cmd, cmd_tecla, clk, X"B"); -- para poder poner la info ="10" para las horas
    end procedure; 
 
   -- Programar una hora con el comando de incremento continuo
@@ -198,14 +201,17 @@ package body pack_test_reloj is
    cmd_tecla <= X"C";                        -- pulso largo en C (incrementa)
    wait until minutos = valor(7 downto 0);   -- esperas hasta los minutos indicados
    pulso_largo <= '0';
-
+    
    tecleo(ena_cmd, cmd_tecla, clk, X"B");    -- pasas a modificar las horas
 
    pulso_largo <= '1';
    cmd_tecla <= X"C";                        -- pulso largo en C (incrementa)
    wait until horas = valor(15 downto 8) and AM_PM = periodo;    -- esperas hasta las horas indicadas en AM o PM
    wait until clk'event and clk = '1';
-   pulso_largo <= '0';   
+   pulso_largo <= '0';  
+    
+   tecleo(ena_cmd, cmd_tecla, clk, X"B"); -- para poder poner la info ="10" para las horas
+   
   end procedure; 
 
   -- Programar una hora indicando el valor de cada campo por introduccion numerica

@@ -39,7 +39,7 @@ begin
       end if;
     end if;
   end process;
-  ena_decenas_minutos <= '1' when ena = '1' and minutos(3 downto 0) = 9 
+  ena_decenas_minutos <= '1' when (ena = '1' or inc_campo='1') and minutos(3 downto 0) = 9 --******************** ERROR AQUI *********************** NO ESTABA EL INC CAMPO
                          else '0';
 
   process(clk, nRst)    -- Decenas de minutos
@@ -64,7 +64,7 @@ begin
     end if;
   end process;
 
-  fdc <= '1' when ena_decenas_minutos = '1' and minutos(7 downto 4) = 5 
+  fdc <= '1' when ena_decenas_minutos = '1' and minutos(7 downto 4) = 5 and  ena = '1'  --******************** ERROR AQUI *********************** NO ESTABA EL ENA
          else '0';
 
 end rtl;
