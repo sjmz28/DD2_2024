@@ -69,17 +69,13 @@ begin
                '0';
 
   -- Paso de formato 24 a 12
-  aux_horas_12_L <= horas(3 downto 0) - 2 when (horas(3 downto 0) > 1 AND horas(7 downto 4) = 1)       -- Decenas = 1  y  Unidades > 1
-                                            OR (horas(3 downto 0) > 1 AND horas(7 downto 4) = 2) else  -- Decenas = 2  y  Unidades > 1  (-2)
-                    horas(3 downto 0) + 8 when horas(3 downto 0) < 2 AND (horas(7 downto 4) = 2) else  -- decenas = 2  y  Unidades < 2  (+8)
-			          		horas(3 downto 0);        
+  aux_horas_12_L <= horas(3 downto 0) - 2 when horas(3 downto 0) > 1 else
+                    horas(3 downto 0) + 8;
 
-  aux_horas_12_H <= horas(7 downto 4) - 1 when (horas(3 downto 0) > 1 AND horas(7 downto 4) = 1)        -- Decenas = 1  y  Unidades > 1.
-                                            OR (horas(3 downto 0) > 1 AND horas(7 downto 4) = 2) else  -- Decenas = 2  y  Unidades > 1. (-2)
-                    horas(7 downto 4) - 2 when horas(3 downto 0) < 2 AND (horas(7 downto 4) = 2) else  -- decenas = 2  y  Unidades < 2  (+8)
-				          	horas(7 downto 4);
+  aux_horas_12_H <= horas(7 downto 4) - 1 when horas(3 downto 0) > 1 else
+                    horas(7 downto 4) - 2;
 					
-  horas_12 <= aux_horas_12_H & aux_horas_12_L when horas > 11 else
+  horas_12 <= aux_horas_12_H & aux_horas_12_L when horas > X"11" else
              horas;
 
   -- Paso de formato 12 a 24
