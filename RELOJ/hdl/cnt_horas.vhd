@@ -75,7 +75,7 @@ begin
   aux_horas_12_H <= horas(7 downto 4) - 1 when horas(3 downto 0) > 1 else
                     horas(7 downto 4) - 2;
 					
-  horas_12 <= aux_horas_12_H & aux_horas_12_L when horas > X"11" else
+  horas_12 <= aux_horas_12_H & aux_horas_12_L when horas > X"11" else -- *****ERROR***** Antes: horas > 11  Ahora: horas > X"11"
              horas;
 
   -- Paso de formato 12 a 24
