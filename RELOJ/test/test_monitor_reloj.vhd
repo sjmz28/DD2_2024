@@ -18,6 +18,7 @@ port(clk:         in std_logic;
      minutos:     in std_logic_vector(7 downto 0);
      horas:       in std_logic_vector(7 downto 0);
      AM_PM:       in std_logic
+	 
     );
 end entity;
 
@@ -494,37 +495,37 @@ begin
 
   -- ************************************ MONITOR 10 ************************************
 
-process (clk, nRst)
+-- process (clk, nRst)
+	-- variable ena_assert: boolean := false;
+    -- variable dato_campo_T1: std_logic_vector(15 downto 0);
+    -- variable load_T1: std_logic_vector(1 downto 0);
 
-    variable dato_campo_T1: std_logic_vector(15 downto 0);
-    variable load_T1: std_logic_vector(1 downto 0);
+-- begin
 
-begin
+  -- if nRst'event and nRst = '0' then
+    -- ena_assert := false;
 
-  if nRst'event and nRst = '0' then
-    ena_assert := false;
+  -- elsif nRst'event and nRst = '1' and nRst'last_value = '0' then
+    -- ena_assert := true;
 
-  elsif nRst'event and nRst = '1' and nRst'last_value = '0' then
-    ena_assert := true;
+  -- elsif clk'event and clk = '1' and ena_assert then
+    -- if load_T1="10" then 
+    -- --comprobar que las horas sean datocampo en el instante anterios
+      -- assert horas = dato_campo_T1
+        -- report "no se esta cargando el valor de dato_campo en horas"
+        -- severity error;
 
-  elsif clk'event and clk = '1' and ena_assert then
-    if load_T1="10" then 
-    --comprobar que las horas sean datocampo en el instante anterios
-      assert horas = dato_campo_T1
-        report "no se esta cargando el valor de dato_campo en horas"
-        severity error;
-
-    elsif load_T1="01" then 
-    --comprobar que las minutos sean datocampo en el instante anterios
-      assert minutos = dato_campo_T1
-        report "no se esta cargando el valor de dato_campo en minutos"
-          severity error;
+    -- elsif load_T1="01" then 
+    -- --comprobar que las minutos sean datocampo en el instante anterios
+      -- assert minutos = dato_campo_T1
+        -- report "no se esta cargando el valor de dato_campo en minutos"
+          -- severity error;
       
-  end if
+  -- end if;
 
-  dato_campo_T1 := dato_campo;
-  load_T1 := load;
-end process;
+  -- dato_campo_T1 := dato_campo;
+  -- load_T1 := load;
+-- end process;
 
   
 end test;

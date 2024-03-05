@@ -199,15 +199,16 @@ package body pack_test_reloj is
 
    pulso_largo <= '1';
    cmd_tecla <= X"C";                        -- pulso largo en C (incrementa)
-   wait until minutos = valor(7 downto 0);   -- esperas hasta los minutos indicados
+   wait until horas = valor(15 downto 8) and AM_PM = periodo;    -- esperas hasta las horas indicadas en AM o PM
+   wait until clk'event and clk = '1';
+   
    pulso_largo <= '0';
     
    tecleo(ena_cmd, cmd_tecla, clk, X"B");    -- pasas a modificar las horas
 
    pulso_largo <= '1';
    cmd_tecla <= X"C";                        -- pulso largo en C (incrementa)
-   wait until horas = valor(15 downto 8) and AM_PM = periodo;    -- esperas hasta las horas indicadas en AM o PM
-   wait until clk'event and clk = '1';
+   wait until minutos = valor(7 downto 0);   -- esperas hasta los minutos indicados
    pulso_largo <= '0';  
     
    tecleo(ena_cmd, cmd_tecla, clk, X"B"); -- para poder poner la info ="10" para las horas
