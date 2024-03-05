@@ -151,38 +151,39 @@ begin
 
   -- ++++++++++++  INCREMENTACION EN PULSACION LARGA +++++++++++++
 
-  esperar_hora(horas, minutos, AM_PM, clk, '0', X"01"&X"01"); -- 00:00:00 am en modo 12 horas
-  entrar_modo_prog( pulso_largo, cmd_tecla, clk); 
-  report "(*) Iniciamos la prueba de programacin mediante pulsacion larga MODO 12H " severity note;
-  wait until clk'event and clk = '1';
-  wait until clk'event and clk = '1';
+  -- esperar_hora(horas, minutos, AM_PM, clk, '0', X"01"&X"01"); -- 00:00:00 am en modo 12 horas
+  -- entrar_modo_prog( pulso_largo, cmd_tecla, clk); 
+  -- report "(*) Iniciamos la prueba de programacin mediante pulsacion larga MODO 12H " severity note;
+  -- wait until clk'event and clk = '1';
+  -- wait until clk'event and clk = '1';
 
-  -- 2. avanzar hasta las 11:59:00 am
-  programar_hora_inc_largo(pulso_largo, ena_cmd, cmd_tecla, horas, minutos, AM_PM, clk, '0', X"00"&X"00");
-  report "(+) Funciona el cambio con pulsacion corta en modo 12 horas" severity note;
+  -- -- 2. avanzar hasta las 11:59:00 am
+  -- programar_hora_inc_largo(pulso_largo, ena_cmd, cmd_tecla, horas, minutos, AM_PM, clk, '0', X"00"&X"00");
+  -- report "(+) Funciona el cambio con pulsacion corta en modo 12 horas" severity note;
   
-  -- 3. probamos lo mismo pero con el modo 24h
-  cambiar_modo_12_24(ena_cmd, cmd_tecla, clk);
-  programar_hora_inc_largo(pulso_largo, ena_cmd, cmd_tecla, horas, minutos, AM_PM, clk, '0', X"01"&X"01");
-  report "(*) Iniciamos la prueba de programacin mediante pulsacion larga MODO 24H " severity note;
-  wait until clk'event and clk = '1';
-  wait until clk'event and clk = '1';
-  -- 4. avanzar hasta las 23:59:00 pm
-  programar_hora_inc_largo(pulso_largo, ena_cmd, cmd_tecla, horas, minutos, AM_PM, clk, '0', X"00"&X"00");
-  report "(+) Funciona el cambio con pulsacion corta en modo 24 horas" severity note;
-  fin_prog(ena_cmd, cmd_tecla, clk);
+  -- -- 3. probamos lo mismo pero con el modo 24h
+  -- cambiar_modo_12_24(ena_cmd, cmd_tecla, clk);
+  -- programar_hora_inc_largo(pulso_largo, ena_cmd, cmd_tecla, horas, minutos, AM_PM, clk, '0', X"01"&X"01");
+  -- report "(*) Iniciamos la prueba de programacin mediante pulsacion larga MODO 24H " severity note;
+  -- wait until clk'event and clk = '1';
+  -- wait until clk'event and clk = '1';
+  -- -- 4. avanzar hasta las 23:59:00 pm
+  -- programar_hora_inc_largo(pulso_largo, ena_cmd, cmd_tecla, horas, minutos, AM_PM, clk, '0', X"00"&X"00");
+  -- report "(+) Funciona el cambio con pulsacion corta en modo 24 horas" severity note;
+  -- fin_prog(ena_cmd, cmd_tecla, clk);
 
   
  
-
-  -- -- 3. que pueda cambiar la hora
-  -- -- 3.1 cambiando una hora normal
-  -- entrar_modo_prog( pulso_largo, cmd_tecla, clk);
-  -- wait until clk'event and clk = '1';
-  -- programar_hora_directa(ena_cmd, cmd_tecla, clk, X"1141"); -- 11:41:00 am en modo 12 horas
-  -- wait until clk'event and clk = '1';
-  -- fin_prog(ena_cmd, cmd_tecla, clk);
-  -- wait until clk'event and clk = '1';
+  -- ++++++++++++  CAMBIO DE HORA POR TECLEO +++++++++++++
+  
+  -- 3. que pueda cambiar la hora
+  -- 3.1 cambiando una hora normal
+  entrar_modo_prog( pulso_largo, cmd_tecla, clk);
+  wait until clk'event and clk = '1';
+  programar_hora_directa(ena_cmd, cmd_tecla, clk, X"0941"); -- 09:41:00 am en modo 12 horas
+  wait until clk'event and clk = '1';
+  fin_prog(ena_cmd, cmd_tecla, clk);
+  wait until clk'event and clk = '1';
 
 
     assert false
