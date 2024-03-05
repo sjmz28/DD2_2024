@@ -78,7 +78,7 @@ begin
     end if;
   end process;
   
-  dato_campo <= dato_ant&cmd_tecla; -- *****ERROR***** Añadimos and comando = numero
+  dato_campo <= dato_ant&cmd_tecla when comando = numero; -- *****ERROR***** Añadimos and comando = numero
   
   -- Deteccion del comando introducido por teclado
   comando <= programar_reloj    when pulso_largo = '1' and cmd_tecla = X"A" 			       else
