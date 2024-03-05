@@ -18,7 +18,7 @@ architecture rtl of cnt_min is
   signal ena_decenas_minutos:	std_logic;
 
 begin
-  process(clk, nRst)    -- Unidades de minutosc
+  process(clk, nRst)    -- Unidades de minutos
   begin
     if nRst = '0' then
       minutos(3 downto 0) <= (others => '0');
