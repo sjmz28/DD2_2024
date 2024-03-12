@@ -78,7 +78,7 @@ begin
     end if;
   end process;
   
-  dato_campo <= dato_ant&cmd_tecla when comando = numero; -- *****ERROR***** Añadimos and comando = numero
+  dato_campo <= dato_ant&cmd_tecla; -- *****ERROR***** Añadimos and comando = numero
   
   -- Deteccion del comando introducido por teclado
   comando <= programar_reloj    when pulso_largo = '1' and cmd_tecla = X"A" 			       else
@@ -94,9 +94,9 @@ begin
   cambiar_modo  <= '1' when comando = cambio_de_modo else
                    '0';
   -- Control de errores cuando se introduce el numero directamente para que el valor introducido sea una hora o minuto valido
-  campo_valido <=  '1' when (estado /= horas)  and                dato_campo < 60 and dato_campo(3 downto 0) < 10 else
-                   '1' when (estado  = horas)  and modo = '1' and dato_campo < 24 and dato_campo(3 downto 0) < 10 else
-                   '1' when (estado  = horas)  and modo = '0' and dato_campo < 12 and dato_campo(3 downto 0) < 10 else
+  campo_valido <=  '1' when (estado /= horas)  and                dato_campo < x"60" and dato_campo(3 downto 0) < 10 else
+                   '1' when (estado  = horas)  and modo = '1' and dato_campo < x"24" and dato_campo(3 downto 0) < 10 else
+                   '1' when (estado  = horas)  and modo = '0' and dato_campo < x"12" and dato_campo(3 downto 0) < 10 else
                    '0';
 
   -- Control del estado del reloj

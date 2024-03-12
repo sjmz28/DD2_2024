@@ -1,0 +1,455 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dC:/altera_lite/16.0
+Ecnt_horas
+Z0 w1709464458
+Z1 DPx4 ieee 15 std_logic_arith 0 22 [G314=:2zXJ`VORJe1J@Z1
+Z2 DPx4 ieee 18 std_logic_unsigned 0 22 ;eZjO2D4ZDz<]0>8AL<ne1
+Z3 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z4 DPx4 ieee 14 std_logic_1164 0 22 eNV`TJ_GofJTzYa?f<@Oe1
+Z5 dC:/Users/Javier/Documents/Universidad/2_semestre/DD2/RELOJ/modelsim
+Z6 8C:/Users/Javier/Documents/Universidad/2_semestre/DD2/RELOJ/hdl/cnt_horas.vhd
+Z7 FC:/Users/Javier/Documents/Universidad/2_semestre/DD2/RELOJ/hdl/cnt_horas.vhd
+l0
+L5
+VgZ09N_BXgFB5beZClimVT0
+!s100 aI8e><ABL=BzoeDnk=bS92
+Z8 OV;C;10.4d;61
+32
+Z9 !s110 1710260027
+!i10b 1
+Z10 !s108 1710260027.000000
+Z11 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/Javier/Documents/Universidad/2_semestre/DD2/RELOJ/hdl/cnt_horas.vhd|
+Z12 !s107 C:/Users/Javier/Documents/Universidad/2_semestre/DD2/RELOJ/hdl/cnt_horas.vhd|
+!i113 1
+Z13 o-work work -2002 -explicit
+Z14 tExplicit 1
+Artl
+R1
+R2
+R3
+R4
+Z15 DEx4 work 9 cnt_horas 0 22 gZ09N_BXgFB5beZClimVT0
+l32
+L19
+VkCoW`=F>NP:z[@Hz:BfbK1
+!s100 j0i;3g^4kogiEKW1=PW_z3
+R8
+32
+R9
+!i10b 1
+R10
+R11
+R12
+!i113 1
+R13
+R14
+Ecnt_min
+Z16 w1709666788
+R1
+R2
+R3
+R4
+R5
+Z17 8C:/Users/Javier/Documents/Universidad/2_semestre/DD2/RELOJ/hdl/cnt_min.vhd
+Z18 FC:/Users/Javier/Documents/Universidad/2_semestre/DD2/RELOJ/hdl/cnt_min.vhd
+l0
+L5
+V]zXWi[8NkAgh4G5^7PYQ@3
+!s100 aHL4EU5hg<zV>=noLWdU>2
+R8
+32
+R9
+!i10b 1
+R10
+Z19 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/Javier/Documents/Universidad/2_semestre/DD2/RELOJ/hdl/cnt_min.vhd|
+Z20 !s107 C:/Users/Javier/Documents/Universidad/2_semestre/DD2/RELOJ/hdl/cnt_min.vhd|
+!i113 1
+R13
+R14
+Artl
+R1
+R2
+R3
+R4
+Z21 DEx4 work 7 cnt_min 0 22 ]zXWi[8NkAgh4G5^7PYQ@3
+l20
+L17
+VXL6@fAlf_JLaJ6fd[HDcG0
+!s100 0R2Vn^;Vdz8eV9Am>n>MZ1
+R8
+32
+R9
+!i10b 1
+R10
+R19
+R20
+!i113 1
+R13
+R14
+Ecnt_reloj
+Z22 w1709461574
+R1
+R2
+R3
+R4
+R5
+Z23 8C:/Users/Javier/Documents/Universidad/2_semestre/DD2/RELOJ/hdl/cnt_reloj.vhd
+Z24 FC:/Users/Javier/Documents/Universidad/2_semestre/DD2/RELOJ/hdl/cnt_reloj.vhd
+l0
+L5
+VVb1Vje8ILh9SoE0a[V;iK2
+!s100 76RXSk:YS<>>Yfd3`Pz1J3
+R8
+32
+Z25 !s110 1710260028
+!i10b 1
+Z26 !s108 1710260028.000000
+Z27 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/Javier/Documents/Universidad/2_semestre/DD2/RELOJ/hdl/cnt_reloj.vhd|
+Z28 !s107 C:/Users/Javier/Documents/Universidad/2_semestre/DD2/RELOJ/hdl/cnt_reloj.vhd|
+!i113 1
+R13
+R14
+Aestructural
+R15
+R21
+Z29 DEx4 work 7 cnt_seg 0 22 @BOMCPTUeZ`:4gHRK@Bn33
+R1
+R2
+R3
+R4
+Z30 DEx4 work 9 cnt_reloj 0 22 Vb1Vje8ILh9SoE0a[V;iK2
+l26
+L22
+Veo=ijoz<9@AcU9ahUPf<01
+!s100 E9BA`e0?T;8FiYzm6J_W40
+R8
+32
+R25
+!i10b 1
+R26
+R27
+R28
+!i113 1
+R13
+R14
+Ecnt_seg
+R22
+R1
+R2
+R3
+R4
+R5
+Z31 8C:/Users/Javier/Documents/Universidad/2_semestre/DD2/RELOJ/hdl/cnt_seg.vhd
+Z32 FC:/Users/Javier/Documents/Universidad/2_semestre/DD2/RELOJ/hdl/cnt_seg.vhd
+l0
+L5
+V@BOMCPTUeZ`:4gHRK@Bn33
+!s100 <H<dG<kLmzAY7J3?Di<9S0
+R8
+32
+R25
+!i10b 1
+R26
+Z33 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/Javier/Documents/Universidad/2_semestre/DD2/RELOJ/hdl/cnt_seg.vhd|
+Z34 !s107 C:/Users/Javier/Documents/Universidad/2_semestre/DD2/RELOJ/hdl/cnt_seg.vhd|
+!i113 1
+R13
+R14
+Artl
+R1
+R2
+R3
+R4
+R29
+l18
+L15
+VD1?CbiNnSZ`]D0J]0CdD^0
+!s100 Zk>A@O@^mYb_KDeY1d@FC2
+R8
+32
+R25
+!i10b 1
+R26
+R33
+R34
+!i113 1
+R13
+R14
+Ectrl_reloj
+Z35 w1710259925
+R1
+R2
+R3
+R4
+R5
+Z36 8C:/Users/Javier/Documents/Universidad/2_semestre/DD2/RELOJ/hdl/ctrl_reloj.vhd
+Z37 FC:/Users/Javier/Documents/Universidad/2_semestre/DD2/RELOJ/hdl/ctrl_reloj.vhd
+l0
+L5
+V9SQ=z_S?LCJ==A25hh:oF2
+!s100 94:m`kOJoCWd18`UD@h;S1
+R8
+32
+R25
+!i10b 1
+R26
+Z38 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/Javier/Documents/Universidad/2_semestre/DD2/RELOJ/hdl/ctrl_reloj.vhd|
+Z39 !s107 C:/Users/Javier/Documents/Universidad/2_semestre/DD2/RELOJ/hdl/ctrl_reloj.vhd|
+!i113 1
+R13
+R14
+Artl
+R1
+R2
+R3
+R4
+Z40 DEx4 work 10 ctrl_reloj 0 22 9SQ=z_S?LCJ==A25hh:oF2
+l43
+L23
+V_eK1IDPGFezf4UzAEYGNV0
+!s100 Z1]YDH>S<E]BWB6;l;DoU3
+R8
+32
+R25
+!i10b 1
+R26
+R38
+R39
+!i113 1
+R13
+R14
+Ppack_test_reloj
+R1
+R2
+R3
+R4
+R16
+R5
+Z41 8C:/Users/Javier/Documents/Universidad/2_semestre/DD2/RELOJ/test/pack_test_reloj.vhd
+Z42 FC:/Users/Javier/Documents/Universidad/2_semestre/DD2/RELOJ/test/pack_test_reloj.vhd
+l0
+L5
+VfhLZLm@`T5MH25ThFR0el2
+!s100 DDoziof]`z;^[le>Ym:m<0
+R8
+32
+b1
+R25
+!i10b 1
+R26
+Z43 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/Javier/Documents/Universidad/2_semestre/DD2/RELOJ/test/pack_test_reloj.vhd|
+Z44 !s107 C:/Users/Javier/Documents/Universidad/2_semestre/DD2/RELOJ/test/pack_test_reloj.vhd|
+!i113 1
+R13
+R14
+Bbody
+Z45 DPx4 work 15 pack_test_reloj 0 22 fhLZLm@`T5MH25ThFR0el2
+R1
+R2
+R3
+R4
+l0
+L73
+Vd`^fT?n7W?>W`kPoKion30
+!s100 >N^<>V28nn01zWT]ES`G13
+R8
+32
+R25
+!i10b 1
+R26
+R43
+R44
+!i113 1
+R13
+R14
+Ereloj
+Z46 w1709463038
+R1
+R2
+R3
+R4
+R5
+Z47 8C:/Users/Javier/Documents/Universidad/2_semestre/DD2/RELOJ/hdl/reloj.vhd
+Z48 FC:/Users/Javier/Documents/Universidad/2_semestre/DD2/RELOJ/hdl/reloj.vhd
+l0
+L6
+VSz8=aQS@aMCLfIHk3KW@Z0
+!s100 JiYF53BOjZhjbcHO656>>0
+R8
+32
+R25
+!i10b 1
+R26
+Z49 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/Javier/Documents/Universidad/2_semestre/DD2/RELOJ/hdl/reloj.vhd|
+Z50 !s107 C:/Users/Javier/Documents/Universidad/2_semestre/DD2/RELOJ/hdl/reloj.vhd|
+!i113 1
+R13
+R14
+Aestructural
+R30
+R40
+R1
+R2
+R3
+R4
+Z51 DEx4 work 5 reloj 0 22 Sz8=aQS@aMCLfIHk3KW@Z0
+l30
+L23
+VH40cBfAShmlVLSffjLJQU1
+!s100 gQceW5cRmz5o6QZNUTmD83
+R8
+32
+R25
+!i10b 1
+R26
+R49
+R50
+!i113 1
+R13
+R14
+Etest_estimulos_reloj
+Z52 w1710260019
+R45
+R1
+R2
+R3
+R4
+R5
+Z53 8C:/Users/Javier/Documents/Universidad/2_semestre/DD2/RELOJ/test/test_estimulos_reloj.vhd
+Z54 FC:/Users/Javier/Documents/Universidad/2_semestre/DD2/RELOJ/test/test_estimulos_reloj.vhd
+l0
+L7
+V?nMN2bb2DXRNi0Bl]3o7h0
+!s100 _^@5<Pj14_AK1YO;eHzdS3
+R8
+32
+R25
+!i10b 1
+R26
+Z55 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/Javier/Documents/Universidad/2_semestre/DD2/RELOJ/test/test_estimulos_reloj.vhd|
+Z56 !s107 C:/Users/Javier/Documents/Universidad/2_semestre/DD2/RELOJ/test/test_estimulos_reloj.vhd|
+!i113 1
+R13
+R14
+Atest
+R45
+R1
+R2
+R3
+R4
+Z57 DEx4 work 20 test_estimulos_reloj 0 22 ?nMN2bb2DXRNi0Bl]3o7h0
+l26
+L24
+VN@N_8LKVJ:@n@BF[JHOP61
+!s100 aRgA_73:4=Imj7LWgN7F[0
+R8
+32
+R25
+!i10b 1
+R26
+R55
+R56
+!i113 1
+R13
+R14
+Etest_monitor_reloj
+Z58 w1710259619
+R45
+R1
+R2
+R3
+R4
+R5
+Z59 8C:/Users/Javier/Documents/Universidad/2_semestre/DD2/RELOJ/test/test_monitor_reloj.vhd
+Z60 FC:/Users/Javier/Documents/Universidad/2_semestre/DD2/RELOJ/test/test_monitor_reloj.vhd
+l0
+L7
+Vj3I9O@90C@i4glXO4`0OP1
+!s100 OgIJoXiabd`8LC@5F[m[B2
+R8
+32
+R25
+!i10b 1
+R26
+Z61 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/Javier/Documents/Universidad/2_semestre/DD2/RELOJ/test/test_monitor_reloj.vhd|
+Z62 !s107 C:/Users/Javier/Documents/Universidad/2_semestre/DD2/RELOJ/test/test_monitor_reloj.vhd|
+!i113 1
+R13
+R14
+Atest
+R45
+R1
+R2
+R3
+R4
+Z63 DEx4 work 18 test_monitor_reloj 0 22 j3I9O@90C@i4glXO4`0OP1
+l27
+L25
+V>5AbCD020fbNNBBh]1^V83
+!s100 GZaP=gA[h@j:T58Yg2C`;1
+R8
+32
+R25
+!i10b 1
+R26
+R61
+R62
+!i113 1
+R13
+R14
+Etest_reloj
+R22
+R45
+R1
+R2
+R3
+R4
+R5
+Z64 8C:/Users/Javier/Documents/Universidad/2_semestre/DD2/RELOJ/test/test_reloj.vhd
+Z65 FC:/Users/Javier/Documents/Universidad/2_semestre/DD2/RELOJ/test/test_reloj.vhd
+l0
+L7
+VG^nWI0iVzIm;]Td8]GXcf1
+!s100 Mnj]8jAL<FF]:Ci9`7iWD1
+R8
+32
+R25
+!i10b 1
+R26
+Z66 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/Javier/Documents/Universidad/2_semestre/DD2/RELOJ/test/test_reloj.vhd|
+Z67 !s107 C:/Users/Javier/Documents/Universidad/2_semestre/DD2/RELOJ/test/test_reloj.vhd|
+!i113 1
+R13
+R14
+Atest
+R63
+R57
+R51
+R45
+R1
+R2
+R3
+R4
+Z68 DEx4 work 10 test_reloj 0 22 G^nWI0iVzIm;]Td8]GXcf1
+l28
+L10
+Z69 Vk^z7e:=zzH>jM[lF@W9Q21
+Z70 !s100 e5I8^YBJ:F5?LNCl5_kTd1
+R8
+32
+R25
+!i10b 1
+R26
+R66
+R67
+!i113 1
+R13
+R14

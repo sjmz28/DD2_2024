@@ -174,13 +174,13 @@ begin
 
   
  
-  -- ++++++++++++  CAMBIO DE HORA POR TECLEO +++++++++++++
+  -- ++++++++++++  CAMBIO DE HORA POR TECLADO +++++++++++++
   
   -- 3. que pueda cambiar la hora
   -- 3.1 cambiando una hora normal
   entrar_modo_prog( pulso_largo, cmd_tecla, clk);
   wait until clk'event and clk = '1';
-  programar_hora_directa(ena_cmd, cmd_tecla, clk, X"0941"); -- 09:41:00 am en modo 12 horas
+  programar_hora_directa(ena_cmd, cmd_tecla, clk, X"1781"); -- 10:41:00 am en modo 12 horas
   wait until clk'event and clk = '1';
   fin_prog(ena_cmd, cmd_tecla, clk);
   wait until clk'event and clk = '1';

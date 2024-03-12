@@ -494,38 +494,34 @@ begin
   end process;
 
   -- ************************************ MONITOR 10 ************************************
+  
+  -- --  MONITOR 10
+  -- process(clk, nRst)
+    -- variable ena_assert: boolean := false;
+	-- variable cmd_tecla_T1:   std_logic_vector(3 downto 0);
+	-- variable cmd_tecla_T2:   std_logic_vector(3 downto 0);
+ 
+  -- begin
+    -- if nRst'event and nRst = '0' then
+      -- ena_assert := false;
 
--- process (clk, nRst)
-	-- variable ena_assert: boolean := false;
-    -- variable dato_campo_T1: std_logic_vector(15 downto 0);
-    -- variable load_T1: std_logic_vector(1 downto 0);
-
--- begin
-
-  -- if nRst'event and nRst = '0' then
-    -- ena_assert := false;
-
-  -- elsif nRst'event and nRst = '1' and nRst'last_value = '0' then
-    -- ena_assert := true;
-
-  -- elsif clk'event and clk = '1' and ena_assert then
-    -- if load_T1="10" then 
-    -- --comprobar que las horas sean datocampo en el instante anterios
-      -- assert horas = dato_campo_T1
-        -- report "no se esta cargando el valor de dato_campo en horas"
-        -- severity error;
-
-    -- elsif load_T1="01" then 
-    -- --comprobar que las minutos sean datocampo en el instante anterios
-      -- assert minutos = dato_campo_T1
-        -- report "no se esta cargando el valor de dato_campo en minutos"
-          -- severity error;
-      
-  -- end if;
-
-  -- dato_campo_T1 := dato_campo;
-  -- load_T1 := load;
--- end process;
+    -- elsif nRst'event and nRst = '1' and nRst'last_value = '0' then
+      -- ena_assert := true;
+	 
+	-- elsif clk'event and clk = '1' and ena_assert then
+	  -- if info = "10"  and ena_cmd = '1' and cmd_tecla = x"B" and cmd_tecla_T1 < 10 then
+	      -- assert horas(3 downto 0) = cmd_tecla_T1
+		  -- report "Error al introducir la unidad de la hora"
+		  -- severity error;
+		  
+		-- if cmd_tecla_T2 < 10 then
+		  -- assert horas(7 downto 4) = cmd_tecla_T2
+		  -- report "Error al introducir la hora la decena de la hora"
+		  -- severity error;
+		-- end if;
+	  -- end if;
+	-- end if;
+  -- end process;
 
   
 end test;
