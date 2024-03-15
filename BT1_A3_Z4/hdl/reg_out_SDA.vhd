@@ -86,6 +86,7 @@ begin
   end process;
 
   -- Salida 
-  SDA_out <= reg_SDA(8);
+  SDA_out <= reg_SDA(8) when reg_SDA(8) = '0' else
+						 'Z';
 
 end rtl;

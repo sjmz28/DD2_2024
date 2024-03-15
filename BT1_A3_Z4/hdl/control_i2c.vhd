@@ -151,7 +151,7 @@ begin
           if cnt_pulsos_SCL = 8 then                  -- de un byte para ir a comprobación de ACK
             estado <= ACK;
 
-          elsif ena_in_SDA = '1' then   -- ******************Ejercicio 3 OPCION A
+          elsif ena_in_SDA = '1' then   -- ******************Ejercicio 3 OPCION C
             cnt_pulsos_SCL <= cnt_pulsos_SCL + 1;
 
           end if;
@@ -198,9 +198,10 @@ begin
   --************************************************************************************************************
 
   -- Control del generador de SCL:
-                       -- ******************************: ejercicio 6 OPCION B
-  ena_SCL <= '1' when estado /= libre or estado /= stop else -- Se habilita tras ini
-             '0';                                            -- en el flanco de subida de SCL despues de ACK
+                       -- ******************************: ejercicio 6 OPCION A
+  ena_SCL <= '1' when estado = cargar_byte or estado = tx_byte or estado = ACK else -- Se habilita tras ini
+             '1' when estado = inhabilitar_SCL else                                 -- Se inhabilita cuando SCL_up vale 1
+             '0';                                                                   -- en el flanco de subida de SCL despues de ACK
   --************************************************************************************************************
 
   -- Control del registro de salida: 
@@ -224,16 +225,16 @@ begin
                                                                   -- afectan al bit de mayor peso del registro de 
                                                                   -- desplazamiento de salida 
 
-                       -- ******************************: ejercicio 5 OPCION A
-  desplaza_reg_out_SDA <= ena_out_SDA when estado = tx_byte or estado = ACK       -- Se desplaza el dato cuando lo indica la segnal de gen_SCL                         
+                       -- ******************************: ejercicio 5 OPCION B
+  desplaza_reg_out_SDA <= ena_out_SDA when estado = tx_byte       -- Se desplaza el dato cuando lo indica la segnal de gen_SCL                         
                           else '0';                               -- Nota: Esta segnal de control tiene menos prioridas
                                                                   -- que reset_SDA y preset_SDA
   --************************************************************************************************************
 
   -- Control del registro de entrada:
-                       -- ******************************: ejercicio 4 OPCION C
-  leer_bit_SDA <= ena_in_SDA when estado /= ACK                                     -- Se capturan todos los valores menos el ACK
-                  else '0';
+                       -- ******************************: ejercicio 4 OPCION B
+  leer_bit_SDA <= ena_in_SDA;                                     -- Se capturan todos los valores menos el ACK
+                  
 
   reset_reg_in_SDA <= ini when estado = libre else                -- Se resete al principio de cualquier tx
                       '0'; 
@@ -242,7 +243,7 @@ end rtl;
 
 -- ejercicio 1 OPCION B
 -- ejercicio 2 OPCION B
--- Ejercicio 3 OPCION C
+-- Ejercicio 3 OPCION A
 -- ejercicio 4 OPCION B
 -- ejercicio 5 OPCION B
 -- ejercicio 6 OPCION A
