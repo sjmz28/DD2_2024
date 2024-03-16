@@ -143,16 +143,16 @@ begin
 
   -- Generacion de las salidas
                                 
-  ena_out_SDA <= ena_SCL when cnt_SCL = (I2C_FAST_T_SCL_H + I2C_FAST_t_hd_dat) else     -- desplaza bit hacia SDA
+  ena_out_SDA <= ena_SCL when cnt_SCL = (I2C_FAST_T_SCL_H + I2C_FAST_t_hd_dat) + 2 else     -- desplaza bit hacia SDA
                  '0';
 
-  ena_in_SDA <= ena_SCL and start when cnt_SCL = I2C_FAST_t_sample else                 -- captura bit de SDA
+  ena_in_SDA <= ena_SCL and start when cnt_SCL = I2C_FAST_t_sample + 1 else                 -- captura bit de SDA
                 '0'; 
 
-  ena_stop_i2c <= not ena_SCL when cnt_SCL = I2C_FAST_t_su_sto else                     -- habilita stop 
+  ena_stop_i2c <= not ena_SCL when cnt_SCL = I2C_FAST_t_su_sto + 1 else                     -- habilita stop 
                   '0';
 
-  ena_start_i2c <= not ena_SCL when cnt_SCL = (I2C_FAST_t_su_sto + I2C_FAST_t_BUF) else -- habilita start
+  ena_start_i2c <= not ena_SCL when cnt_SCL = (I2C_FAST_t_su_sto + I2C_FAST_t_BUF) + 1 else -- habilita start
                    '0';
  
   SCL_up <= start when cnt_SCL = 1                                                      -- flanco de subida de SCL
