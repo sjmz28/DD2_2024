@@ -85,23 +85,23 @@ end entity;
 architecture rtl of gen_SCL is
   -- Constantes correspondientes a las especificaciones de tiempo I2C en modo FAST
   -- Reloj de 50 MHz
-  constant I2C_FAST_T_SCL:        natural := 125;       -- Valor implementado = 2.5 us (fSCLmax = 400 KHz) 
-  constant I2C_FAST_T_SCL_L:      natural := 80;        -- Valor implementado = 1.6 us (tLOWmin = 1.3 us + tRmax = 0.3)
-  constant I2C_FAST_T_SCL_H:      natural := 45;        -- Valor implementado = 0.9 us (tHIGHmin = 0.6 us + tFmax = 0.3) 
+  constant I2C_FAST_T_SCL:        natural := 250;       -- Valor implementado = 2.5 us (fSCLmax = 400 KHz) 
+  constant I2C_FAST_T_SCL_L:      natural := 160;        -- Valor implementado = 1.6 us (tLOWmin = 1.3 us + tRmax = 0.3)
+  constant I2C_FAST_T_SCL_H:      natural := 90;        -- Valor implementado = 0.9 us (tHIGHmin = 0.6 us + tFmax = 0.3) 
 
-  constant I2C_FAST_t_hd_dat:     natural := 30;        -- Valor implementado = 0.6 us (> tHD-DATmin = 0 + tfmax = 300 ns y < tvd-datmax = 0.9)
+  constant I2C_FAST_t_hd_dat:     natural := 60;        -- Valor implementado = 0.6 us (> tHD-DATmin = 0 + tfmax = 300 ns y < tvd-datmax = 0.9)
                                                         -- Nota: tvd-datmax se deriva de (tLOWmin - (tsu-dat + tRmax (o tFmax)) de SDA
                                                         -- Se cumple con un margen de 0.3 us
  
-  constant I2C_FAST_t_su_sto:     natural := 45;        -- Valor implementado = 0.9 us (tSU-STOmin + trmax=  (0.6 + 0.3) us)
-  constant I2C_FAST_t_BUF:        natural := 80;        -- Valor implementado = 1.6 us (tBUFmin + Trmax = (1.3 + 0.3) us)
+  constant I2C_FAST_t_su_sto:     natural := 90;        -- Valor implementado = 0.9 us (tSU-STOmin + trmax=  (0.6 + 0.3) us)
+  constant I2C_FAST_t_BUF:        natural := 160;        -- Valor implementado = 1.6 us (tBUFmin + Trmax = (1.3 + 0.3) us)
 
   -- Instante de muestreo de SDA (no es un parametro I2C)
   constant I2C_FAST_t_sample:     natural := I2C_FAST_T_SCL_H/2 + 1; -- Se muestrea SDA en el centro del pulso
 
 
   -- Cuenta para generacion de SCL y salidas
-  signal cnt_SCL:           std_logic_vector(6 downto 0);
+  signal cnt_SCL:           std_logic_vector(7 downto 0); -- *************** Ampliada la capacidad del contador a maximo modulo 256
 
   -- Segnales internas para el control del buffer three-state
   signal n_ctrl_SCL: std_logic;
@@ -178,4 +178,4 @@ begin
   end process;
 
   --***********************************************************************************************************
-end rtl;,
+end rtl;

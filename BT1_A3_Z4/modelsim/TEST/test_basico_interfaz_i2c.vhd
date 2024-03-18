@@ -53,7 +53,7 @@ begin
   SCL <= 'H';
 
   U0_sim: entity work.driver_clk_nRst(sim)
-          generic map(Tclk => 20 ns)
+          generic map(Tclk => 10 ns)
           port map(clk  => clk,
                    nRst => nRst);
  

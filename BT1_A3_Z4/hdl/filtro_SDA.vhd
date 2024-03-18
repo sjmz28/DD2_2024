@@ -40,27 +40,57 @@ port(clk:           in     std_logic;
 end entity;
 
 architecture rtl of filtro_SDA is
-  signal SDA_in_T:   std_logic_vector(4 downto 1);   -- Rango con referencias
+  signal SDA_in_T:   std_logic_vector(6 downto 1);   -- Rango con referencias
   signal SDA_T_0:    std_logic;                      -- Simplificacion del codigo
+  signal SDA_T_1:    std_logic;
+  signal SDA_T_2:    std_logic;
+  signal SDA_T_3:    std_logic;
 
 begin
   SDA_T_0 <= To_X01(SDA_in);                         -- SDA_in vale '0' o 'H'
+  
+  process(clk, nRst)
+  begin
+	if nRst = '0' then
+		SDA_T_1 <= '0';
+	elsif clk'event and clk = '1' then
+		SDA_T_1 <= SDA_T_0;
+	end if;
+  end process;
+  
+  process(clk, nRst)
+  begin
+	if nRst = '0' then
+		SDA_T_2 <= '0';
+	elsif clk'event and clk = '1' then
+		SDA_T_2 <= SDA_T_1;
+	end if;
+  end process;
+  
+  process(clk, nRst)
+  begin
+	if nRst = '0' then
+		SDA_T_3 <= '0';
+	elsif clk'event and clk = '1' then
+		SDA_T_3 <= SDA_T_2;
+	end if;
+  end process;
 
-  process(clk, nRst)                                 -- Filtrado de glitches < 60 ns
+  process(clk, nRst)                                 -- Filtrado de glitches < 60 ns; Actividad 13, al aumentar el reloj a T = 10ns podemos comprobar glitches de 50ns
   begin
     if nRst = '0' then
       SDA_in_T <= (others => '1');
 
     elsif clk'event and clk = '1' then
-      if (SDA_in_T(4) = SDA_T_0) and (SDA_in_T(3 downto 1) /= SDA_T_0&SDA_T_0&SDA_T_0) then  
-        SDA_in_T(3 downto 1) <= SDA_T_0&SDA_T_0&SDA_T_0;
+      if (SDA_in_T(6) = SDA_T_3) and (SDA_in_T(5 downto 1) /= SDA_T_3&SDA_T_3&SDA_T_3&SDA_T_3&SDA_T_3) then  
+        SDA_in_T(5 downto 1) <= SDA_T_3&SDA_T_3&SDA_T_3&SDA_T_3&SDA_T_3;
   
       else
-        SDA_in_T <= SDA_in_T(3 downto 1)&SDA_T_0;
+        SDA_in_T <= SDA_in_T(5 downto 1)&SDA_T_3;
   
       end if;
     end if;
   end process;
-  SDA_filtrado <= SDA_in_T(4);
+  SDA_filtrado <= SDA_in_T(6);
 
 end rtl;
