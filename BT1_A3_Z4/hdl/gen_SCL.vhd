@@ -85,9 +85,9 @@ end entity;
 architecture rtl of gen_SCL is
   -- Constantes correspondientes a las especificaciones de tiempo I2C en modo FAST
   -- Reloj de 50 MHz
-  constant I2C_FAST_T_SCL:        natural := 124;       -- Valor implementado = 2.5 us (fSCLmax = 400 KHz) 
-  constant I2C_FAST_T_SCL_L:      natural := 79;        -- Valor implementado = 1.6 us (tLOWmin = 1.3 us + tRmax = 0.3)
-  constant I2C_FAST_T_SCL_H:      natural := 44;        -- Valor implementado = 0.9 us (tHIGHmin = 0.6 us + tFmax = 0.3) 
+  constant I2C_FAST_T_SCL:        natural := 125;       -- Valor implementado = 2.5 us (fSCLmax = 400 KHz) 
+  constant I2C_FAST_T_SCL_L:      natural := 80;        -- Valor implementado = 1.6 us (tLOWmin = 1.3 us + tRmax = 0.3)
+  constant I2C_FAST_T_SCL_H:      natural := 45;        -- Valor implementado = 0.9 us (tHIGHmin = 0.6 us + tFmax = 0.3) 
 
   constant I2C_FAST_t_hd_dat:     natural := 30;        -- Valor implementado = 0.6 us (> tHD-DATmin = 0 + tfmax = 300 ns y < tvd-datmax = 0.9)
                                                         -- Nota: tvd-datmax se deriva de (tLOWmin - (tsu-dat + tRmax (o tFmax)) de SDA
@@ -115,7 +115,7 @@ begin
   process(clk, nRst)
   begin
     if nRst = '0' then
-      cnt_SCL <= (0 => '0', others => '0');
+      cnt_SCL <= (0 => '1', others => '0');
       start <= '0';
 
     elsif clk'event and clk = '1' then
@@ -124,7 +124,7 @@ begin
           cnt_SCL <= cnt_SCL + 1;
      
         else
-          cnt_SCL <= (0 => '0', others => '0'); 
+          cnt_SCL <= (0 => '1', others => '0'); 
           start <= '1';                                -- Se pone a 1 al principio del nivel alto del primer pulso de SCL
 
         end if;
@@ -134,7 +134,7 @@ begin
         start <= '0';                                   -- Se pone a 0 cuando ena_SCL se desactiva
 
       else
-        cnt_SCL <= (0 => '0', others => '0');         
+        cnt_SCL <= (0 => '1', others => '0');         
         start <= '0';
 
       end if;
@@ -143,16 +143,16 @@ begin
 
   -- Generacion de las salidas
                                 
-  ena_out_SDA <= ena_SCL when cnt_SCL = (I2C_FAST_T_SCL_H + I2C_FAST_t_hd_dat) + 2 else     -- desplaza bit hacia SDA
+  ena_out_SDA <= ena_SCL when cnt_SCL = (I2C_FAST_T_SCL_H + I2C_FAST_t_hd_dat) else     -- desplaza bit hacia SDA
                  '0';
 
-  ena_in_SDA <= ena_SCL and start when cnt_SCL = I2C_FAST_t_sample + 1 else                 -- captura bit de SDA
+  ena_in_SDA <= ena_SCL and start when cnt_SCL = I2C_FAST_t_sample else                 -- captura bit de SDA
                 '0'; 
 
-  ena_stop_i2c <= not ena_SCL when cnt_SCL = I2C_FAST_t_su_sto + 1 else                     -- habilita stop 
+  ena_stop_i2c <= not ena_SCL when cnt_SCL = I2C_FAST_t_su_sto else                     -- habilita stop 
                   '0';
 
-  ena_start_i2c <= not ena_SCL when cnt_SCL = (I2C_FAST_t_su_sto + I2C_FAST_t_BUF) + 1 else -- habilita start
+  ena_start_i2c <= not ena_SCL when cnt_SCL = (I2C_FAST_t_su_sto + I2C_FAST_t_BUF) else -- habilita start
                    '0';
  
   SCL_up <= start when cnt_SCL = 1                                                      -- flanco de subida de SCL
@@ -160,9 +160,14 @@ begin
 
   -- ********************* Generacion de SCL con salida en colector (drenador abierto) ************************
   --
-  n_ctrl_SCL <= '1' when cnt_SCL <= I2C_FAST_T_SCL_H else                               -- reloj i2c
+  n_ctrl_SCL <= '1' when cnt_SCL < I2C_FAST_T_SCL_H  or cnt_SCL = I2C_FAST_T_SCL else      --reloj i2c: cambio: < no <= para que cuente uno menos
+																									 -- Añadido: cnt_SCL = I2C_FAST_T_SCL
+ 																									 -- se mantiene a nivel alto tambien en la cuenta 125
                 not ena_SCL;  
-  
+				
+  SCL_T1 <= n_ctrl_SCL when n_ctrl_SCL = '0' else                                  -- Modelo de la salida SCL en colector abierto
+         'Z';  
+		 
   process(clk, nRst)
   begin
     if nRst = '0' then
@@ -171,10 +176,6 @@ begin
 		SCL<=SCL_T1;
 	end if;
   end process;
-  
-	
-  SCL_T1 <= n_ctrl_SCL when n_ctrl_SCL = '0' else                                  -- Modelo de la salida SCL en colector abierto
-         'Z';
 
   --***********************************************************************************************************
-end rtl;
+end rtl;,
