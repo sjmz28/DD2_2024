@@ -18,7 +18,7 @@
 --   y se indica la pulsación con un bit (tecla_pulsada) el tiempo que dure el tiempo que dure la pulsación.
 
 -- Frecuencia de muestreo de las filas:
---   El retardo maximo que se tarda en dectar una pulsacion a calculamos como: (t_activacion_de_una_fila) x (nº_filas)
+--   El retardo maximo que se tarda en dectar una pulsacion la calculamos como: (t_activacion_de_una_fila) x (nº_filas)
 
 -- Rebotes:
 --   Para prevenir los rebotes, emplearemos una sennal periodida de habiliotacion de reloj (tic) con una duracion de 5ms
