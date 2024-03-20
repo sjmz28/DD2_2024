@@ -23,3 +23,61 @@
 -- Rebotes:
 --   Para prevenir los rebotes, emplearemos una sennal periodida de habiliotacion de reloj (tic) con una duracion de 5ms
 --   que se encargará tambien de muestrear la tecla cada 5ms
+entity teclado   is
+    port(clk:           in     std_logic;
+         nRst:          in     std_logic;
+         col0:          in     std_logic;
+         col1:          in     std_logic;
+         col2:          in     std_logic;
+         col3:          in     std_logic;
+         tic:           in     std_logic;
+         fil0:          buffer    std_logic;
+         fil1:          buffer    std_logic;
+         fil2:          buffer    std_logic;
+         fil3:          buffer    std_logic;
+         tecla :        buffer    std_logic_vector(3 downto 0);
+         tecla_pulsada: buffer    std_logic;
+         pulso_largo:   buffer    std_logic);
+    end entity;
+
+architecture rtl of teclado is
+  
+    signal filas: std_logic_vector(3 downto 0);
+    signal columnas: std_logic_vector(3 downto 0);
+    signal col_muestreada: std_logic_vector(3 downto 0);
+    signal contador_fila: std_logic_vector(1 downto 0);
+    signal contador_columna: std_logic_vector(1 downto 0);
+
+    filas<=fil0 & fil1 & fil2 & fil3;
+    columnas<=col0 & col1 & col2 & col3;
+begin
+    -- nuestro objetivo por una parte es "turnar" las filas y por otra, quitar los rebotes de las columnas 
+    -- por lo que por un lado vamos a utiilzar un contador para saber por que fila vamos y por otro usar ese 
+    -- tic para quitar el rebote de las columnas
+   proccess(clk, nRst)
+   if nRst='0' then
+      tecla_pulsada<='0';
+      pulso_largo<='0';
+      tecla<="0000";
+      contador_fila<="00";
+    elsif clk'event and clk='1' then
+        if tic='1' then 
+            col_muestreada=columnas; -- al pasar todos el registro de columnas, si hay alguna activa lo sabremos
+    
+            if contador_fila<4 then -- con esto controlamos por que fila vamos 
+                contador_fila<=contador_fila+1;
+            else
+                contador_fila<="00";
+            end if;
+            -- me he perdido ya:)
+    end if;
+           
+
+
+
+
+
+
+end rtl;
+
+    
