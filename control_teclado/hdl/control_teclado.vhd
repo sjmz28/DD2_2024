@@ -47,12 +47,14 @@ architecture rtl of teclado is
     signal col_muestreada: std_logic_vector(3 downto 0);
     signal contador_fila: std_logic_vector(1 downto 0);
     signal contador_columna: std_logic_vector(1 downto 0);
+	
+	signal ena_muestreo: std_logic;  -- sennal que habilita el muestreo de las filas.
 
-    filas<=fil0 & fil1 & fil2 & fil3;
-    columnas<=col0 & col1 & col2 & col3;
+    
+	
 begin
     -- nuestro objetivo por una parte es "turnar" las filas y por otra, quitar los rebotes de las columnas 
-    -- por lo que por un lado vamos a utiilzar un contador para saber por que fila vamos y por otro usar ese 
+    -- por lo que por un lado vamos a utilizar un contador para saber por que fila vamos y por otro usar ese 
     -- tic para quitar el rebote de las columnas
    proccess(clk, nRst)
    if nRst='0' then
@@ -72,9 +74,35 @@ begin
             -- me he perdido ya:)
     end if;
            
+		   
 
-
-
+  filas    <= fil3 & fil2 & fil1 & fil0;             -- Fila de menor peso a la derecha.
+  columnas <= col3 & col2 & col1 & col0;             -- Columna de menor peso a la derecha.
+  -- Rebotes columnas
+  process(clk, nRst)
+  begin
+    if nRst = '0' then
+	  col_muestreada <= (others => '1');             -- Columnas activas a nivel bajo
+	elsif clk'event and clk = '1' then
+	  if tic = '1' then 
+	    col_muestreada = col;
+	  end if;
+	end if;
+  end process;
+  
+  -- Registro de desplazamiento filas
+  process(clk, nRst)
+  begin
+    if nRst = '0' then
+	  filas <= (0 => '0', others => '1');
+	elsif clk'event and clk = '1' then
+	  if ena_muestreo = '1' then                     -- Habilita el desplazamiento del nivel bajo
+		  if tic = '1' then                          -- Iniciamos el desplazamiento cuando se produce un pulso de tic
+			filas <= filas(2 downto 0) & fila(3);
+		  end if;
+		end if;
+  end process;
+	  
 
 
 
