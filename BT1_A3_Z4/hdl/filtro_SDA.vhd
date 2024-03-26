@@ -76,7 +76,7 @@ begin
 	end if;
   end process;
 
-  process(clk, nRst)                                 -- Filtrado de glitches < 60 ns; Actividad 13, al aumentar el reloj a T = 10ns podemos comprobar glitches de 50ns
+  process(clk, nRst)  -- Filtrado de glitches < 60 ns; Actividad 13, al aumentar el reloj a T = 10ns podemos comprobar glitches de 50ns
   begin
     if nRst = '0' then
       SDA_in_T <= (others => '1');
