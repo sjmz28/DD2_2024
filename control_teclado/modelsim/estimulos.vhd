@@ -34,10 +34,15 @@ stim: process
     wait until clk'event and clk = '1';
     -- Para completar por los estudiantes (inicio)
     -- ...
+    pulsa_tecla(clk, x"B", pulsacion_corta, tecla_test, duracion_test, pulsar_tecla);
+    espera_TIC(clk, tic, 5);
+	pulsa_tecla(clk, x"5", pulsacion_corta, tecla_test, duracion_test, pulsar_tecla);
+	espera_TIC(clk, tic, 5);
+	pulsa_tecla(clk, x"C", pulsacion_corta, tecla_test, duracion_test, pulsar_tecla);
+    espera_TIC(clk, tic, 5);
 
-
-
-
+    pulsa_tecla(clk, x"B", pulsacion_larga, tecla_test, duracion_test, pulsar_tecla);
+	espera_TIC(clk, tic, 5);
 	
     -- Para completar por los estudiantes (fin) 
     assert(false) report "******************************Fin del test************************" severity failure;

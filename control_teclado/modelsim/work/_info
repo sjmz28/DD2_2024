@@ -1,0 +1,298 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dC:/Users/Javier/Documents/Universidad/2_semestre/DD2/BT1_A3_Z4/modelsim
+Ectrl_tec
+Z0 w1711792041
+Z1 DPx4 ieee 15 std_logic_arith 0 22 [G314=:2zXJ`VORJe1J@Z1
+Z2 DPx4 ieee 18 std_logic_unsigned 0 22 ;eZjO2D4ZDz<]0>8AL<ne1
+Z3 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z4 DPx4 ieee 14 std_logic_1164 0 22 eNV`TJ_GofJTzYa?f<@Oe1
+Z5 dC:/Users/Javier/Documents/Universidad/2_semestre/DD2/control_teclado/modelsim
+Z6 8C:/Users/Javier/Documents/Universidad/2_semestre/DD2/control_teclado/hdl/ctrl_tec.vhd
+Z7 FC:/Users/Javier/Documents/Universidad/2_semestre/DD2/control_teclado/hdl/ctrl_tec.vhd
+l0
+L31
+V5[LJ]=ClfjB];VE2VnEh@1
+!s100 Hm_ab^_4o6>G<hzNo`GmZ1
+Z8 OV;C;10.4d;61
+32
+Z9 !s110 1711792226
+!i10b 1
+Z10 !s108 1711792226.000000
+Z11 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/Javier/Documents/Universidad/2_semestre/DD2/control_teclado/hdl/ctrl_tec.vhd|
+Z12 !s107 C:/Users/Javier/Documents/Universidad/2_semestre/DD2/control_teclado/hdl/ctrl_tec.vhd|
+!i113 1
+Z13 o-work work -2002 -explicit
+Z14 tExplicit 1
+Artl
+R1
+R2
+R3
+R4
+Z15 DEx4 work 8 ctrl_tec 0 22 5[LJ]=ClfjB];VE2VnEh@1
+l62
+L42
+Z16 V<QAKS^<?aHR@jlbTRP3Qf1
+Z17 !s100 j3VMLkJEOZT3]UC@P`NOZ3
+R8
+32
+R9
+!i10b 1
+R10
+R11
+R12
+!i113 1
+R13
+R14
+Eestimulos
+Z18 w1711792216
+Z19 DPx4 work 17 pack_test_teclado 0 22 DT5dZg`;h7bfb1gb3i3_X3
+R1
+R2
+R3
+R4
+R5
+Z20 8C:/Users/Javier/Documents/Universidad/2_semestre/DD2/control_teclado/modelsim/estimulos.vhd
+Z21 FC:/Users/Javier/Documents/Universidad/2_semestre/DD2/control_teclado/modelsim/estimulos.vhd
+l0
+L15
+V:GjnWFTzaBk`5MTjoGC^k0
+!s100 TJll>0`4^:<ZdNj]cfa[T3
+R8
+32
+R9
+!i10b 1
+R10
+Z22 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/Javier/Documents/Universidad/2_semestre/DD2/control_teclado/modelsim/estimulos.vhd|
+Z23 !s107 C:/Users/Javier/Documents/Universidad/2_semestre/DD2/control_teclado/modelsim/estimulos.vhd|
+!i113 1
+R13
+R14
+Atest
+R19
+R1
+R2
+R3
+R4
+Z24 DEx4 work 9 estimulos 0 22 :GjnWFTzaBk`5MTjoGC^k0
+l27
+L25
+VSAcLhc91heb?;J1K@j@KT0
+!s100 E_N=ieEEBQ7k<RM7mA[kn2
+R8
+32
+R9
+!i10b 1
+R10
+R22
+R23
+!i113 1
+R13
+R14
+Emonitor
+Z25 w1614770907
+R19
+R1
+R2
+R3
+R4
+R5
+Z26 8C:/Users/Javier/Documents/Universidad/2_semestre/DD2/control_teclado/modelsim/monitor.vhd
+Z27 FC:/Users/Javier/Documents/Universidad/2_semestre/DD2/control_teclado/modelsim/monitor.vhd
+l0
+L18
+VDE<R40DNa5U;IE^`62iD03
+!s100 Lb8iHZUR:f?CcV:gzRQFg1
+R8
+32
+R9
+!i10b 1
+R10
+Z28 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/Javier/Documents/Universidad/2_semestre/DD2/control_teclado/modelsim/monitor.vhd|
+Z29 !s107 C:/Users/Javier/Documents/Universidad/2_semestre/DD2/control_teclado/modelsim/monitor.vhd|
+!i113 1
+R13
+R14
+Atest
+R19
+R1
+R2
+R3
+R4
+Z30 DEx4 work 7 monitor 0 22 DE<R40DNa5U;IE^`62iD03
+l31
+L29
+VZC<N:K67`Ck[K;8?CEgSX3
+!s100 Om5oDN]RJBK>TE75oZ7JO2
+R8
+32
+R9
+!i10b 1
+R10
+R28
+R29
+!i113 1
+R13
+R14
+Ppack_test_teclado
+R1
+R2
+R3
+R4
+Z31 w1711791172
+R5
+Z32 8C:/Users/Javier/Documents/Universidad/2_semestre/DD2/control_teclado/modelsim/pack_test_teclado.vhd
+Z33 FC:/Users/Javier/Documents/Universidad/2_semestre/DD2/control_teclado/modelsim/pack_test_teclado.vhd
+l0
+L27
+VDT5dZg`;h7bfb1gb3i3_X3
+!s100 n:88o=jGfd;Zzl3;AN`7Z2
+R8
+32
+b1
+R9
+!i10b 1
+R10
+Z34 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/Javier/Documents/Universidad/2_semestre/DD2/control_teclado/modelsim/pack_test_teclado.vhd|
+Z35 !s107 C:/Users/Javier/Documents/Universidad/2_semestre/DD2/control_teclado/modelsim/pack_test_teclado.vhd|
+!i113 1
+R13
+R14
+Bbody
+R19
+R1
+R2
+R3
+R4
+l0
+L53
+VBmi3>JQRHmY:h2i3j_3hg3
+!s100 mfi2@MCGR?kUSQdaAO`KE3
+R8
+32
+R9
+!i10b 1
+R10
+R34
+R35
+!i113 1
+R13
+R14
+Eteclado
+Z36 w1613567970
+R3
+R4
+R5
+Z37 8C:/Users/Javier/Documents/Universidad/2_semestre/DD2/control_teclado/modelsim/teclado.vhd
+Z38 FC:/Users/Javier/Documents/Universidad/2_semestre/DD2/control_teclado/modelsim/teclado.vhd
+l0
+L22
+VZf<WKn_XFb@bKhJJ6h_P12
+!s100 oNGGM<Jb4PQ_kT5<kPoDm2
+R8
+32
+R9
+!i10b 1
+R10
+Z39 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/Javier/Documents/Universidad/2_semestre/DD2/control_teclado/modelsim/teclado.vhd|
+Z40 !s107 C:/Users/Javier/Documents/Universidad/2_semestre/DD2/control_teclado/modelsim/teclado.vhd|
+!i113 1
+R13
+R14
+Atest
+R3
+R4
+Z41 DEx4 work 7 teclado 0 22 Zf<WKn_XFb@bKhJJ6h_P12
+l32
+L30
+V=Zm`oe5izNC0V3f0R<?D[3
+!s100 fZba[g:X[gA1ee43FSh:T0
+R8
+32
+R9
+!i10b 1
+R10
+R39
+R40
+!i113 1
+R13
+R14
+Artl
+R1
+R2
+R3
+R4
+DEx4 work 7 teclado 0 22 o[b[cU`m[[;Sa>9N51<JP1
+l61
+L42
+V<D?a7MQdL7o^lcZj`;@@E1
+!s100 zDC2cMK=JU[4JIOEKL1XR0
+R8
+32
+!s110 1711789087
+!i10b 1
+!s108 1711789087.000000
+!s90 -reportprogress|300|-work|work|-2002|-explicit|C:/Users/Javier/Documents/Universidad/2_semestre/DD2/control_teclado/hdl/control_teclado.vhd|
+!s107 C:/Users/Javier/Documents/Universidad/2_semestre/DD2/control_teclado/hdl/control_teclado.vhd|
+!i113 1
+R13
+R14
+FC:/Users/Javier/Documents/Universidad/2_semestre/DD2/control_teclado/hdl/control_teclado.vhd
+w1711730703
+8C:/Users/Javier/Documents/Universidad/2_semestre/DD2/control_teclado/hdl/control_teclado.vhd
+Etest_ctrl_tec
+Z42 w1614765274
+R19
+R1
+R2
+R3
+R4
+R5
+Z43 8C:\Users\Javier\Documents\Universidad\2_semestre\DD2\control_teclado\modelsim\test_ctrl_tec.vhd
+Z44 FC:\Users\Javier\Documents\Universidad\2_semestre\DD2\control_teclado\modelsim\test_ctrl_tec.vhd
+l0
+L48
+V?i8<MjSZogjZnN4?Lij`Y3
+!s100 3H^W8oQj`jQ8^d>2;09A;3
+R8
+32
+R9
+!i10b 1
+R10
+Z45 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:\Users\Javier\Documents\Universidad\2_semestre\DD2\control_teclado\modelsim\test_ctrl_tec.vhd|
+Z46 !s107 C:\Users\Javier\Documents\Universidad\2_semestre\DD2\control_teclado\modelsim\test_ctrl_tec.vhd|
+!i113 1
+R13
+R14
+Atest
+R30
+R24
+R15
+R41
+R19
+R1
+R2
+R3
+R4
+DEx4 work 13 test_ctrl_tec 0 22 ?i8<MjSZogjZnN4?Lij`Y3
+l66
+L51
+V8XAG@Dn_UiHlA:7YzF4n:3
+!s100 TW;]6SK`S5:]?nB_>PNkT1
+R8
+32
+R9
+!i10b 1
+R10
+R45
+R46
+!i113 1
+R13
+R14

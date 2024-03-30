@@ -1,0 +1,67 @@
+C:/Users/Javier/Documents/Universidad/2_semestre/DD2/control_teclado/modelsim/monitor.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/Javier/Documents/Universidad/2_semestre/DD2/control_teclado/modelsim/monitor.vhd
+Model Technology ModelSim ALTERA vcom 10.4d Compiler 2015.12 Dec 30 2015
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Loading package pack_test_teclado
+-- Compiling entity monitor
+-- Compiling architecture test of monitor
+
+} {} {}} C:/Users/Javier/Documents/Universidad/2_semestre/DD2/control_teclado/modelsim/teclado.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/Javier/Documents/Universidad/2_semestre/DD2/control_teclado/modelsim/teclado.vhd
+Model Technology ModelSim ALTERA vcom 10.4d Compiler 2015.12 Dec 30 2015
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity teclado
+-- Compiling architecture test of teclado
+
+} {} {}} C:/Users/Javier/Documents/Universidad/2_semestre/DD2/control_teclado/modelsim/estimulos.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/Javier/Documents/Universidad/2_semestre/DD2/control_teclado/modelsim/estimulos.vhd
+Model Technology ModelSim ALTERA vcom 10.4d Compiler 2015.12 Dec 30 2015
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Loading package pack_test_teclado
+-- Compiling entity estimulos
+-- Compiling architecture test of estimulos
+
+} {} {}} C:/Users/Javier/Documents/Universidad/2_semestre/DD2/control_teclado/modelsim/pack_test_teclado.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/Javier/Documents/Universidad/2_semestre/DD2/control_teclado/modelsim/pack_test_teclado.vhd
+Model Technology ModelSim ALTERA vcom 10.4d Compiler 2015.12 Dec 30 2015
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Compiling package pack_test_teclado
+-- Compiling package body pack_test_teclado
+-- Loading package pack_test_teclado
+
+} {} {}} C:/Users/Javier/Documents/Universidad/2_semestre/DD2/control_teclado/hdl/ctrl_tec.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/Javier/Documents/Universidad/2_semestre/DD2/control_teclado/hdl/ctrl_tec.vhd
+Model Technology ModelSim ALTERA vcom 10.4d Compiler 2015.12 Dec 30 2015
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Compiling entity ctrl_tec
+-- Compiling architecture rtl of ctrl_tec
+
+} {} {}} C:/Users/Javier/Documents/Universidad/2_semestre/DD2/control_teclado/modelsim/test_ctrl_tec.vhd {1 {vcom -work work -2002 -explicit -stats=none {C:\Users\Javier\Documents\Universidad\2_semestre\DD2\control_teclado\modelsim\test_ctrl_tec.vhd}
+Model Technology ModelSim ALTERA vcom 10.4d Compiler 2015.12 Dec 30 2015
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Loading package pack_test_teclado
+-- Compiling entity test_ctrl_tec
+-- Compiling architecture test of test_ctrl_tec
+-- Loading entity teclado
+-- Loading entity ctrl_tec
+-- Loading entity estimulos
+-- Loading entity monitor
+
+} {} {}}
