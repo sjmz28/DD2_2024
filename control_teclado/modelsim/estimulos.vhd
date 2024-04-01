@@ -34,7 +34,11 @@ stim: process
     wait until clk'event and clk = '1';
     -- Para completar por los estudiantes (inicio)
     -- ...
-    pulsa_tecla(clk, x"B", pulsacion_corta, tecla_test, duracion_test, pulsar_tecla);
+	report("(-) Empieza a contar tics");
+	espera_TIC(clk, tic, 5);
+	report("(-) teclea la tecla B");
+    pulsa_tecla(clk, x"B", pulsacion_corta, tecla_test, duracion_test, pulsar_tecla);  --pulsa durante 6 tics
+	report("(-) Termina de pulsar la tecla B");
     espera_TIC(clk, tic, 5);
 	pulsa_tecla(clk, x"5", pulsacion_corta, tecla_test, duracion_test, pulsar_tecla);
 	espera_TIC(clk, tic, 5);
