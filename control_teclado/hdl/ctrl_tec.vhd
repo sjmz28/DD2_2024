@@ -43,7 +43,8 @@ architecture rtl of ctrl_tec is
   
 
   signal col_filtrada     : std_logic_vector(3 downto 0);   -- Columnas filtradas sin rebotes
-  signal fila_aux        : std_logic_vector(3 downto 0);   -- Senna que retrasa un tic el muestreo de las filas
+  signal col_activa       : std_logic;                      -- Detecta si se ha detectado una columna
+  signal fila_aux         : std_logic_vector(3 downto 0);   -- Senna que retrasa un tic el muestreo de las filas
   signal ena_muestreo     : std_logic;                      -- sennal que habilita el muestreo de las filas.
   
   -- Contador de 2 segundos con clk
@@ -58,16 +59,50 @@ architecture rtl of ctrl_tec is
   
   type t_estado is (muestreo, pulsacion, corta, larga);
   signal estado: t_estado;
+  
+  signal tecla_aux        : std_logic_vector(3 downto 0);
 
 begin
+  
+  --  Registro de desplazamiento filas 
+  process(clk, nRst)
+  begin
+    if nRst = '0' then
+	  fila <= (0 => '0', others => '1');         -- NO SE POR QUE ALTERA LA ENTRADA DE LAS COLUMNAS DESDE EL TEST
+	elsif clk'event and clk = '1' then
+	  if tic = '1' and ena_muestreo = '1' then      -- Iniciamos el desplazamiento cuando se produce un pulso de tic y ena_muestreo esten activas
+		fila <= fila(2 downto 0) & fila(3);
+	  end if;
+	end if;
+  end process;
+  
+  -- Rebotes columnas
+  process(clk, nRst)
+  begin
+    if nRst = '0' then
+	  col_filtrada <= (others => '1');               -- Columnas activas a nivel bajo
+	elsif clk'event and clk = '1' then
+	  if tic = '1' then 
+	    col_filtrada <= columna;
+	  end if;
+	end if;
+  end process;
+  
+  col_activa <= '1' when columna /= x"F" else
+                '0';
+
+  
   
   --Automata de control
   process(clk, nRst)
   begin
     if nRst = '0' then
 	  estado <= muestreo;
-	  tecla_pulsada <= '1';
+	  tecla_pulsada <= '0';
 	  ena_cnt_2seg <= '0';
+	  ena_muestreo <= '0';
+	  pulso_largo <= '0';
+	  
 	elsif clk'event and clk = '1' then
 	  case estado is
 	    when muestreo =>
@@ -75,7 +110,7 @@ begin
 		  pulso_largo <= '0';
 		  tecla_pulsada <= '0';
 		  
-		  if col_filtrada /= X"F" then
+		  if col_activa = '1' then
 		    estado <= pulsacion;
 		  end if;
 		  
@@ -83,7 +118,7 @@ begin
 		  ena_muestreo <= '0';
 		  ena_cnt_2seg <= '1';
 		  
-		  if col_filtrada = X"F" then
+		  if col_activa = '0' then
 		    estado <= corta;
 		  elsif fdc = '1' then
 		    estado <= larga;
@@ -97,7 +132,7 @@ begin
 		when larga =>
 		  pulso_largo <= '1';
 		  ena_cnt_2seg <= '0';
-		  if col_filtrada = X"F" then
+		  if col_activa = '0' then
 		    estado <= muestreo;
 		  end if;
 		  
@@ -125,34 +160,11 @@ begin
 	end if;
   end process;
   
-  fdc <= '1' when cnt_2seg = modulo_2seg else
-        '0';
+  fdc <= '1' when cnt_2seg = 10 else                  -- Reescalamos a 10 para no tener que esperar a 2 seg
+         '0';
   
-  -- Rebotes columnas
-  process(clk, nRst)
-  begin
-    if nRst = '0' then
-	  col_filtrada <= (others => '1');               -- Columnas activas a nivel bajo
-	elsif clk'event and clk = '1' then
-	  if tic = '1' then 
-	    col_filtrada <= columna;
-	  end if;
-	end if;
-  end process;
-  
-  -- Registro de desplazamiento filas
-  process(clk, nRst)
-  begin
-    if nRst = '0' then
-	  fila <= (0 => '0', others => '1');            -- Colocamos la primera fila a 0 para iniciar con ella el muestreo
-	elsif clk'event and clk = '1' then
-	  if ena_muestreo = '1' then                     -- Habilita el desplazamiento del nivel bajo por las filas
-		if tic = '1' then                          -- Iniciamos el desplazamiento cuando se produce un pulso de tic
-			fila <= fila(2 downto 0) & fila(3);
-		end if;
-	  end if;
-	end if;
-  end process;
+  -- fdc <= '1' when cnt_2seg = modulo_2seg else      -- Descomentar para sintesis
+         -- '0';
   
   -- Retraso de las filas para que no coja el siguiente muestreo
   process(clk, nRst)
@@ -166,23 +178,25 @@ begin
 	end if;
   end process;
 	  
-  tecla <= X"0" when fila_aux(3) = '0' and col_filtrada(1) = '0' else
-           X"1" when fila_aux(0) = '0' and col_filtrada(0) = '0' else
-		   X"2" when fila_aux(0) = '0' and col_filtrada(1) = '0' else
-		   X"3" when fila_aux(0) = '0' and col_filtrada(2) = '0' else
-		   X"4" when fila_aux(1) = '0' and col_filtrada(0) = '0' else
-		   X"5" when fila_aux(1) = '0' and col_filtrada(1) = '0' else
-		   X"6" when fila_aux(1) = '0' and col_filtrada(2) = '0' else
-		   X"7" when fila_aux(2) = '0' and col_filtrada(0) = '0' else
-		   X"8" when fila_aux(2) = '0' and col_filtrada(1) = '0' else
-		   X"9" when fila_aux(2) = '0' and col_filtrada(2) = '0' else
-		   X"A" when fila_aux(3) = '0' and col_filtrada(0) = '0' else
-		   X"B" when fila_aux(3) = '0' and col_filtrada(2) = '0' else
-		   X"C" when fila_aux(3) = '0' and col_filtrada(3) = '0' else
-		   X"D" when fila_aux(2) = '0' and col_filtrada(3) = '0' else
-		   X"E" when fila_aux(1) = '0' and col_filtrada(3) = '0' else
-		   X"F" when fila_aux(0) = '0' and col_filtrada(3) = '0' else
-		   "ZZZZ";
+  tecla_aux <= X"0" when fila_aux(3) = '0' and col_filtrada(1) = '0' else
+               X"1" when fila_aux(0) = '0' and col_filtrada(0) = '0' else
+		       X"2" when fila_aux(0) = '0' and col_filtrada(1) = '0' else
+		       X"3" when fila_aux(0) = '0' and col_filtrada(2) = '0' else
+		       X"4" when fila_aux(1) = '0' and col_filtrada(0) = '0' else
+		       X"5" when fila_aux(1) = '0' and col_filtrada(1) = '0' else
+		       X"6" when fila_aux(1) = '0' and col_filtrada(2) = '0' else
+		       X"7" when fila_aux(2) = '0' and col_filtrada(0) = '0' else
+		       X"8" when fila_aux(2) = '0' and col_filtrada(1) = '0' else
+		       X"9" when fila_aux(2) = '0' and col_filtrada(2) = '0' else
+		       X"A" when fila_aux(3) = '0' and col_filtrada(0) = '0' else
+		       X"B" when fila_aux(3) = '0' and col_filtrada(2) = '0' else
+		       X"C" when fila_aux(3) = '0' and col_filtrada(3) = '0' else
+		       X"D" when fila_aux(2) = '0' and col_filtrada(3) = '0' else
+		       X"E" when fila_aux(1) = '0' and col_filtrada(3) = '0' else
+		       X"F" when fila_aux(0) = '0' and col_filtrada(3) = '0' else
+		       "XXXX";
+  tecla <= tecla_aux when pulso_largo = '1' or tecla_pulsada = '1' else
+           "XXXX";
 
 
 end rtl;
